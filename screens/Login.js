@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Octicons, Ionicons } from '@expo/vector-icons';
+import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
 import {
     StyleContainer,
     InnerContainer,
@@ -13,12 +13,19 @@ import {
     StyleTextInput,
     StyleRightIcon,
     ButtonText,
-    StyleButton
+    StyleButton,
+    Line,
+    MessageBox,
+    ExtraText,
+    ExtraView,
+    TextLink,
+    TextLinkContent
+
 } from './../components/styles';
 import { Formik } from "formik";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
-const { brand } = Colors
+const { brand, darklight, primary } = Colors
 const Login = () => {
     const [hidePassword, setHidePassword] = useState(true);
     return (
@@ -38,7 +45,7 @@ const Login = () => {
                         console.log(values);
                     }}
                 >
-                    {({ handleChange, handleBlur, values }) => (
+                    {({ handleChange, handleBlur, handleSubmit, values }) => (
 
                         <StyledFormArea>
 
@@ -63,9 +70,35 @@ const Login = () => {
                                 hidePassword={hidePassword}
                                 setHidePassword={setHidePassword}
                             />
-                            <StyleButton>
+                            <MessageBox>...</MessageBox>
+                            <StyleButton
+                                onPress={handleSubmit}
+
+                            >
                                 <ButtonText>Login</ButtonText>
                             </StyleButton>
+                            <Line />
+                            <StyleButton
+                                google={true}
+                                onPress={handleSubmit}
+                                style={{ alignItems: 'center' }}
+
+                            >
+                                <Fontisto
+                                    name="google"
+                                    color={primary}
+                                    size={15}
+
+
+                                ></Fontisto>
+                                <ButtonText google={true}>Login with Google</ButtonText>
+                            </StyleButton>
+                            <ExtraView>
+                                <ExtraText>Don't have account already! </ExtraText>
+                                <TextLink>
+                                    <TextLinkContent>Sign-up</TextLinkContent>
+                                </TextLink>
+                            </ExtraView>
                         </StyledFormArea>
                     )}
                 </Formik>

@@ -7,9 +7,11 @@ export const Colors = {
     teritary: "#1F2973",
     brand: "#6D28D9",
     green: "#10B981",
-    red: "#EF4444"
+    red: "#EF4444",
+    darklight: '#F0FFFF'
+
 }
-const { primary, secondary, teritary, brand, red, green } = Colors;
+const { primary, secondary, teritary, brand, red, green, darklight } = Colors;
 export const StyleContainer = styled.View`
 flex:1;
 padding:25px;
@@ -83,10 +85,15 @@ z-index:1
 
 `
 export const StyleButton = styled.TouchableOpacity`
-padding:15px;
+padding:10px;
 border-radius:5px;
 background-color:${brand};
 font-size:16px
+${(props) => props.google == true && `
+background-color:${red}
+justify-content:center;
+flex-direction:row;
+`}
 
 `
 export const ButtonText = styled.Text`
@@ -96,4 +103,43 @@ justify-content:center;
 border-radius:5px;
 align-items:center;
 text-align:center
+
+${(props) => props.google == true && `
+margin:10px
+background-color:${red}
+justify-content:center;
+font-size:10px;
+align-items:center;
+
+`}
+`;
+export const MessageBox = styled.Text`
+ text-align:center;
+ font-size:13px;
+`;
+export const Line = styled.View`
+height: 2px;
+width:100%;
+background-color: ${darklight}
+`;
+export const ExtraView = styled.View`
+justify-content:center;
+flex-direction:row;
+align-items:center;
+padding:10px;
+`
+export const ExtraText = styled.Text`
+justify-content:center;
+align-items:center;
+font-size:15px;
+
+`
+export const TextLink = styled.TouchableOpacity`
+justify-content:center;
+align-items:center;
+`
+export const TextLinkContent = styled.Text`
+color:${brand}
+font-size:15px;
+
 `
