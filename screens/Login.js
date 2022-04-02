@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
+import axios from 'axios';
 import {
     StyleContainer,
     InnerContainer,
@@ -25,9 +26,35 @@ import {
 import { Formik } from "formik";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
-const { brand, darklight, primary } = Colors
-const Login = () => {
+const { brand, darklight, primary } = Colors;
+const handleLogin = (values, navigation) => {
+    let req = JSON.stringify(values)
+
+    fetch('http://192.168.1.5:8080/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: req,
+    })
+        .then(async (res) => {
+            let response = await res.json();
+            if (response.error == 0) {
+                navigation.navigate('HomePage')
+            }
+
+        })
+        .catch(e => console.log(e));
+
+}
+
+
+
+const Login = ({ navigation }) => {
     const [hidePassword, setHidePassword] = useState(true);
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+
     return (
         <StyleContainer>
             <StatusBar style="auto"></StatusBar>
@@ -41,9 +68,7 @@ const Login = () => {
                 <Subtitle>Acount Login</Subtitle>
                 <Formik
                     initialValues={{ email: '', password: '' }}
-                    onSubmit={(values) => {
-                        console.log(values);
-                    }}
+                    onSubmit={values => handleLogin(values, navigation)}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values }) => (
 
@@ -96,7 +121,9 @@ const Login = () => {
                             <ExtraView>
                                 <ExtraText>Don't have account already! </ExtraText>
                                 <TextLink>
-                                    <TextLinkContent>Sign-up</TextLinkContent>
+                                    <TextLinkContent
+                                        onPress={() => navigation.navigate("Signup")}
+                                    >Sign-up</TextLinkContent>
                                 </TextLink>
                             </ExtraView>
                         </StyledFormArea>
@@ -108,33 +135,39 @@ const Login = () => {
 
     );
 }
-const MyTextInput = ({ label, icon, isPassword, hidePassword, setHidePassword, ...props }) => {
-    return (
-        <View>
-            <StyleLeftIcon>
-                <Octicons
-                    name={icon}
-                    color={brand}
-                    size={30}
-                />
+const MyTextInput =
+    ({ label, icon,
+        isPassword,
+        hidePassword,
+        setHidePassword,
+        ...props }) => {
+        return (
+            <View>
+                <StyleLeftIcon>
+                    <Octicons
+                        name={icon}
+                        color={brand}
+                        size={30}
+                    />
 
-            </StyleLeftIcon>
-            <StyleInputLabel>{label}</StyleInputLabel>
-            <StyleTextInput  {...props} />
-            {isPassword &&
-                (
-                    <StyleRightIcon
-                        onPress={
-                            () => setHidePassword(!hidePassword)
-                        }
-                    >
-                        <Ionicons
-                            size={30}
-                            name={hidePassword ? 'md-eye-off' : 'md-eye'}
-                        />
-                    </StyleRightIcon>
-                )}
-        </View>
-    )
-}
+                </StyleLeftIcon>
+                <StyleInputLabel>{label}</StyleInputLabel>
+                <StyleTextInput
+                    {...props} />
+                {isPassword &&
+                    (
+                        <StyleRightIcon
+                            onPress={
+                                () => setHidePassword(!hidePassword)
+                            }
+                        >
+                            <Ionicons
+                                size={30}
+                                name={hidePassword ? 'md-eye-off' : 'md-eye'}
+                            />
+                        </StyleRightIcon>
+                    )}
+            </View>
+        )
+    }
 export default Login;
