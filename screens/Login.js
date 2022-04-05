@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
 import axios from 'axios';
+import { URL } from './../constants'
 import {
     StyleContainer,
     InnerContainer,
@@ -30,7 +31,7 @@ const { brand, darklight, primary } = Colors;
 const handleLogin = (values, navigation) => {
     let req = JSON.stringify(values)
 
-    fetch('http://192.168.1.5:8080/api/login', {
+    fetch(URL.LOCALHOST + '/api/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -40,7 +41,8 @@ const handleLogin = (values, navigation) => {
         .then(async (res) => {
             let response = await res.json();
             if (response.error == 0) {
-                navigation.navigate('HomePage')
+                let data = response.userdata
+                navigation.navigate('HomePage', { data });
             }
 
         })

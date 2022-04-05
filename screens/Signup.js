@@ -26,8 +26,30 @@ import {
 import { Formik } from "formik";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
+import { URL } from "../constants";
 const { brand, darklight, primary } = Colors
-const Signup = () => {
+const handleSignup = (values, navigation) => {
+    values.roleId = 4;
+    let req = JSON.stringify(values);
+    fetch(URL.LOCALHOST + '/api/create-new-user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: req,
+    })
+        .then(async (res) => {
+            let response = await res.json();
+            if (response.errorCode == 0) {
+                console.log(response);
+                navigation.navigate('Login');
+            }
+
+        })
+        .catch(e => console.log(e));
+}
+const Signup = ({ navigation }) => {
+
     const [hidePassword, setHidePassword] = useState(true);
 
     return (
@@ -40,7 +62,8 @@ const Signup = () => {
                     <Subtitle>Acount Signup</Subtitle>
                     <Formik
                         initialValues={{ email: '', password: '', tel: '', address: '' }}
-                        onSubmit={(values) => {
+                        onSubmit={values => {
+                            handleSignup(values, navigation);
 
                         }}
                     >

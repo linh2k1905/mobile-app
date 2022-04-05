@@ -11,7 +11,13 @@ import {
 
 } from './../components/styles';
 import { StatusBar } from "expo-status-bar";
-const HomePage = () => {
+
+const HomePage = ({ navigation, route }) => {
+    const [userName, setuserName] = useState('');
+
+    let data = route.params.data.firstName;
+
+    console.log(typeof data);
 
     return (
         <StyleContainer>
@@ -23,7 +29,7 @@ const HomePage = () => {
                 >
                 </PageLogo>
                 <PageTitle>TimPhongTro123</PageTitle>
-                <Subtitle>Acount HomePage</Subtitle>
+                <Subtitle>Welcome  HomePage</Subtitle>
 
 
             </InnerContainer>
