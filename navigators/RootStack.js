@@ -20,7 +20,7 @@ const RootStack = () => {
 
 
                 }}
-                initialRouteName='Login'>
+                initialRouteName='HomePage'>
 
 
                 <Stack.Screen name='Signup' component={Signup} />

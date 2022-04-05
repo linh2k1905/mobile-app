@@ -11,30 +11,28 @@ import {
 
 } from './../components/styles';
 import { StatusBar } from "expo-status-bar";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Home from '../screens/Home';
+import House from '../screens/House';
+import NewPost from '../screens/NewPost';
+import User from '../screens/User';
+import { View } from "react-native";
 
-const HomePage = ({ navigation, route }) => {
-    const [userName, setuserName] = useState('');
+const Tab = createBottomTabNavigator();
 
-    let data = route.params.data.firstName;
-
-    console.log(typeof data);
+const HomePage = () => {
 
     return (
-        <StyleContainer>
-            <StatusBar style="auto"></StatusBar>
-            <InnerContainer>
-                <PageLogo
-                    resizeMode='cover'
-                    source={require('../assets/logo.jpeg')}
-                >
-                </PageLogo>
-                <PageTitle>TimPhongTro123</PageTitle>
-                <Subtitle>Welcome  HomePage</Subtitle>
+        <View>
 
+            <Tab.Navigator>
+                <Tab.Screen name="Home" component={Home} />
+                <Tab.Screen name="House" component={House} />
+                <Tab.Screen name="User" component={User} />
+                <Tab.Screen name="NewPost" component={NewPost} />
+            </Tab.Navigator>
 
-            </InnerContainer>
-        </StyleContainer>
-
+        </View>
     );
 }
 
