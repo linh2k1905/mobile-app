@@ -4,7 +4,9 @@ import { View, Text } from 'react-native'
 const Home = () => {
     return (
 
-        <View>
+        <View
+            style={[{ backgroundColor: '#673ab7' }]}
+        >
             <Text>Home</Text>
         </View>
     )

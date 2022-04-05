@@ -7,7 +7,7 @@ const House = () => {
         <View
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-            <Text>HouseHello every one</Text>
+            <Text>House Page</Text>
         </View>
     )
 }

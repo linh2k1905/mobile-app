@@ -1,12 +1,11 @@
 import react from 'react-native'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
 const NewPost = () => {
-    return
-    (
+    return (
 
         <View>
-            NewPost
+            <Text>New Post</Text>
         </View>
     )
 }

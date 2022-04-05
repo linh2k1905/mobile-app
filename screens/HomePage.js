@@ -28,8 +28,8 @@ const HomePage = () => {
         <Tab.Navigator>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="House" component={House} />
-            <Tab.Screen name="User" component={User} />
-            <Tab.Screen name="NewPost" component={NewPost} />
+            <Tab.Screen name="New Post" component={NewPost} />
+            <Tab.Screen name="Account" component={User} />
         </Tab.Navigator>
 
 

@@ -5,7 +5,7 @@ const User = () => {
     return (
 
         <View>
-            <Text>Userss</Text>
+            <Text>User</Text>
         </View>
     )
 }
