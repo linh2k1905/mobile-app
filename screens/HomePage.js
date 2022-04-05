@@ -23,16 +23,16 @@ const Tab = createBottomTabNavigator();
 const HomePage = () => {
 
     return (
-        <View>
 
-            <Tab.Navigator>
-                <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="House" component={House} />
-                <Tab.Screen name="User" component={User} />
-                <Tab.Screen name="NewPost" component={NewPost} />
-            </Tab.Navigator>
 
-        </View>
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="House" component={House} />
+            <Tab.Screen name="User" component={User} />
+            <Tab.Screen name="NewPost" component={NewPost} />
+        </Tab.Navigator>
+
+
     );
 }
 
