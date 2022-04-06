@@ -4,7 +4,7 @@ import Login from './../screens/Login';
 import Signup from './../screens/Signup';
 import HomePage from '../screens/HomePage';
 import { Colors } from '../components/styles';
-const { primary, secondary, teritary } = Colors
+const { teritary } = Colors
 const Stack = createNativeStackNavigator();
 
 const RootStack = () => {
@@ -16,7 +16,7 @@ const RootStack = () => {
                         backgoundColor: 'transparent'
                     },
                     headerTintColor: teritary,
-                    headerTitle: '',
+                    headerShown: false
 
 
                 }}
