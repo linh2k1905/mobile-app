@@ -1,7 +1,9 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { URL } from '../constants';
-const Home = () => {
+
+const Home = ({ navigation }) => {
+
     const [home, setHome] = useState([]);
     function getAllHouseFromServer() {
 
@@ -20,9 +22,17 @@ const Home = () => {
         return (<View>
             {home.length > 0 && home.map((item, index) => {
                 return (
-                    <View key={index}>
-                        <Text >{item.name}</Text>
-                        <Text >{item.price / 1000000}</Text>
+                    <TouchableOpacity
+                        style={styles.containerHouse}
+                        key={index}
+                        onPress={() => { navigation.navigate('DetailHouse', { item }) }}
+                    >
+                        <View style={styles.imageHouse}>
+                            <View style={styles.infoHouse}><Text style={styles.titleInfoHouse}>Tên nhà trọ:{item.name}</Text></View>
+                            <View style={styles.infoHouse}><Text style={styles.priceInfoHouse} >Giá: {item.price / 1000000} Triệu</Text></View>
+                            <View style={styles.infoHouse}><Text style={styles.addressInfoHouse}>Địa chỉ: {item.address}</Text></View>
+                            <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Thành phố: {item.City.name} </Text></View>
+                        </View>
                         <Image
 
                             source={{
@@ -30,9 +40,9 @@ const Home = () => {
 
 
                             }}
-                            style={{ height: 200, width: 250 }}
+                            style={styles.imageHouse}
                         />
-                    </View>
+                    </TouchableOpacity>
 
 
                 )
@@ -52,15 +62,35 @@ const Home = () => {
     )
 }
 const styles = StyleSheet.create({
-    container: {
-        paddingTop: 50,
+    containerHouse: {
+        paddingTop: 10,
+        flexDirection: 'row',
+        width: '100%'
     },
-    stretch: {
-        width: 200,
-        height: 200,
+    infoHouse: {
+        flexDirection: 'column'
+    },
+    titleInfoHouse: {
+        color: 'red',
+        fontWeight: 'bold'
+    },
+    priceInfoHouse: {
+        color: 'blue',
+        fontWeight: 'bold'
+    },
+    cityInfoHouse: {
+        color: 'green',
+        fontWeight: '400'
+
+    },
+    addressInfoHouse: {
+        color: 'blue'
+    },
+    imageHouse: {
+        width: '50%',
+        height: 150,
         resizeMode: 'cover',
-        borderColor: 'red',
-        borderWidth: 1
+
 
 
     },

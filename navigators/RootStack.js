@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './../screens/Login';
 import Signup from './../screens/Signup';
 import HomePage from '../screens/HomePage';
+import DetailHouse from '../screens/DetailHouse';
 import { Colors } from '../components/styles';
 const { teritary } = Colors
 const Stack = createNativeStackNavigator();
@@ -26,6 +27,7 @@ const RootStack = () => {
                 <Stack.Screen name='Signup' component={Signup} />
                 <Stack.Screen name='HomePage' component={HomePage} />
                 <Stack.Screen name='Login' component={Login} />
+                <Stack.Screen name='DetailHouse' component={DetailHouse} />
 
             </Stack.Navigator>
 
