@@ -143,6 +143,11 @@ color:${brand}
 font-size:15px;
 
 `
+export const MapHouse = styled.View`
+width:100%;
+height:350px;
+border: 1px solid gray;
+`
 export const styles = StyleSheet.create({
     containerHouse: {
         paddingTop: 10,
@@ -190,7 +195,5 @@ export const styles = StyleSheet.create({
 
 
     },
-    bottom: {
-        marginBottom: 0
-    }
+
 });
