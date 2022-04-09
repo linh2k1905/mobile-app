@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 export const Colors = {
     primary: "#ffffff",
@@ -143,3 +143,54 @@ color:${brand}
 font-size:15px;
 
 `
+export const styles = StyleSheet.create({
+    containerHouse: {
+        paddingTop: 10,
+        flexDirection: 'row',
+        width: '100%'
+    },
+    containerHouseDetail: {
+        top: 10,
+        paddingTop: 50
+
+    },
+    infoHouse: {
+        flexDirection: 'column'
+    },
+    titleInfoHouse: {
+        color: 'red',
+        fontWeight: 'bold',
+
+    },
+    titleInfoHouseDetail: {
+        color: 'red',
+        fontWeight: 'bold',
+        fontSize: 30,
+        paddingTop: 10,
+        paddingBottom: 10,
+        alignItems: 'center'
+    },
+    priceInfoHouse: {
+        color: 'blue',
+        fontWeight: 'bold'
+    },
+    cityInfoHouse: {
+        color: 'green',
+        fontWeight: '400'
+
+    },
+    addressInfoHouse: {
+        color: 'blue'
+    },
+    imageHouse: {
+        width: '50%',
+        height: 150,
+        resizeMode: 'cover',
+
+
+
+    },
+    bottom: {
+        marginBottom: 0
+    }
+});

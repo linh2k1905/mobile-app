@@ -1,13 +1,36 @@
-import { View, Text } from 'react-native';
-import HomePage from './HomePage';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { styles } from '../components/styles';
+const DetailHouse = ({ route, navigation }) => {
+    let { item } = route.params;
 
-const DetailHouse = () => {
     return (
 
-        <View>
+        <View
+            style={styles.containerHouseDetail}
+        >
 
-            <Text>DetailHouse Page</Text>
+            <View style={styles.imageHouseDetail}>
+                <View style={styles.titleInfoHouseDetail}><Text style={styles.titleInfoHouse}>{item.name}</Text></View>
+                <Image
+                    source={{
+                        uri: item.image
+                    }}
+                    style={styles.imageHouse}
+                />
+
+                <View style={styles.infoHouse}><Text style={styles.priceInfoHouse} >Giá: {item.price / 1000000} Triệu</Text></View>
+                <View style={styles.infoHouse}><Text style={styles.addressInfoHouse}>Địa chỉ: {item.address}</Text></View>
+                <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Thành phố: {item.City.name} </Text></View>
+                <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Thành phố: {item.descriptionVi} </Text></View>
+                <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Thành phố: {item.descriptionEn} </Text></View>
+            </View>
+
+
         </View>
+
+
+
     )
 }
+
 export default DetailHouse;

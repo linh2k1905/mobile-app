@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { URL } from '../constants';
-
+import { styles } from './../components/styles'
 const Home = ({ navigation }) => {
 
     const [home, setHome] = useState([]);
@@ -61,38 +61,5 @@ const Home = ({ navigation }) => {
         </View>
     )
 }
-const styles = StyleSheet.create({
-    containerHouse: {
-        paddingTop: 10,
-        flexDirection: 'row',
-        width: '100%'
-    },
-    infoHouse: {
-        flexDirection: 'column'
-    },
-    titleInfoHouse: {
-        color: 'red',
-        fontWeight: 'bold'
-    },
-    priceInfoHouse: {
-        color: 'blue',
-        fontWeight: 'bold'
-    },
-    cityInfoHouse: {
-        color: 'green',
-        fontWeight: '400'
 
-    },
-    addressInfoHouse: {
-        color: 'blue'
-    },
-    imageHouse: {
-        width: '50%',
-        height: 150,
-        resizeMode: 'cover',
-
-
-
-    },
-});
 export default Home;
