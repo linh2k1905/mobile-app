@@ -146,7 +146,13 @@ font-size:15px;
 export const MapHouse = styled.View`
 width:100%;
 height:350px;
-border: 1px solid gray;
+`
+export const ContentImageAndGetBook = styled.View`
+width:100%;
+
+`
+export const ContentGetBooking = styled.View`
+width:50%;
 `
 export const styles = StyleSheet.create({
     containerHouse: {
@@ -155,8 +161,8 @@ export const styles = StyleSheet.create({
         width: '100%'
     },
     containerHouseDetail: {
-        top: 10,
-        paddingTop: 50
+        marginTop: 10,
+
 
     },
     infoHouse: {
@@ -171,7 +177,6 @@ export const styles = StyleSheet.create({
         color: 'red',
         fontWeight: 'bold',
         fontSize: 30,
-        paddingTop: 10,
         paddingBottom: 10,
         alignItems: 'center'
     },
