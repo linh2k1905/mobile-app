@@ -1,7 +1,12 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { styles, MapHouse } from '../components/styles';
+import
+MapView from 'react-native-maps'
 const DetailHouse = ({ route, navigation }) => {
     let { item } = route.params;
+    let lat = parseFloat(item.lat);
+    let lang = parseFloat(item.lang);
+
 
     return (
 
@@ -25,7 +30,31 @@ const DetailHouse = ({ route, navigation }) => {
                 <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Thành phố: {item.descriptionEn} </Text></View>
             </View>
             <View style={styles.titleInfoHouseDetail}><Text style={styles.titleInfoHouseDetail} >Xem bản đồ </Text></View>
-            <MapHouse />
+            <MapHouse>
+                <MapView
+                    style={{ height: 500, width: 500 }}
+                    region={
+                        {
+                            latitude: lat,
+                            longitude: lang,
+                            latitudeDelta: 0.015,
+                            longitudeDelta: 0.01
+                        }
+
+                    }
+
+                >
+                    <MapView.Marker
+                        coordinate={{
+                            latitude: lat,
+                            longitude: lang
+                        }}
+
+                    />
+
+
+                </MapView>
+            </MapHouse>
 
 
         </View>
