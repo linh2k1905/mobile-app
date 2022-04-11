@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { withTheme } from 'styled-components';
 
 export const Colors = {
     primary: "#ffffff",
@@ -149,10 +150,11 @@ height:350px;
 `
 export const ContentImageAndGetBook = styled.View`
 width:100%;
-
+flex-direction:row
 `
 export const ContentGetBooking = styled.View`
 width:50%;
+
 `
 export const styles = StyleSheet.create({
     containerHouse: {
@@ -200,5 +202,12 @@ export const styles = StyleSheet.create({
 
 
     },
+    bookingbtn: {
+        color: "white",
+        backgroundColor: "blue",
+        width: 80,
+        marginLeft: 10
+
+    }
 
 });

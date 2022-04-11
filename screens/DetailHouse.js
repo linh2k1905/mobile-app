@@ -8,7 +8,9 @@ const DetailHouse = ({ route, navigation }) => {
     let { item } = route.params;
     let lat = parseFloat(item.lat);
     let lang = parseFloat(item.lang);
-
+    const handleLoadBooking = () => {
+        alert('event ok');
+    }
 
     return (
         <ScrollView>
@@ -31,7 +33,22 @@ const DetailHouse = ({ route, navigation }) => {
                             }}
                             style={styles.imageHouse}
                         />
-                        <ContentGetBooking></ContentGetBooking>
+                        <ContentGetBooking>
+                            <Text>Đặt lịch hẹn</Text>
+                            <Text>Chủ trọ: {item.User.firstName + " " + item.User.lastName}</Text>
+                            <Text>Số điện thoại: {item.User.tel}</Text>
+                            <Text>Email: {item.User.email}</Text>
+                            <TouchableOpacity
+                                style={styles.bookingbtn}
+                                onPress={() => { handleLoadBooking() }}
+                            ><Text
+                                style={{ color: 'white' }}>Đặt lịch hẹn</Text></TouchableOpacity>
+
+
+
+
+
+                        </ContentGetBooking>
                     </ContentImageAndGetBook>
 
                     <View style={styles.infoHouse}><Text style={styles.priceInfoHouse} >Giá: {item.price / 1000000} Triệu</Text></View>
