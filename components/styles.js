@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import { withTheme } from 'styled-components';
 
 export const Colors = {
@@ -207,6 +207,17 @@ export const styles = StyleSheet.create({
         backgroundColor: "blue",
         width: 80,
         marginLeft: 10
+
+    },
+    body: {
+        margin: StatusBar.currentHeight + 10,
+    },
+
+    title: {
+        color: teritary,
+        fontSize: 20,
+        textAlign: 'center',
+        fontWeight: '600'
 
     }
 

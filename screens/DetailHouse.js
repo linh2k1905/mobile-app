@@ -8,15 +8,13 @@ const DetailHouse = ({ route, navigation }) => {
     let { item } = route.params;
     let lat = parseFloat(item.lat);
     let lang = parseFloat(item.lang);
-    const handleLoadBooking = () => {
-        alert('event ok');
-    }
+
 
     return (
         <ScrollView>
             <TouchableOpacity
                 style={{ marginTop: 10 }}
-                onPress={() => { navigation.navigate('Home') }}
+                onPress={() => { navigation.navigate('Home'), item }}
             >
                 <Text style={{ color: red }}> <MaterialCommunityIcons name="home" color={red} size={20} /> Về trang chủ</Text>
             </TouchableOpacity>
@@ -40,7 +38,7 @@ const DetailHouse = ({ route, navigation }) => {
                             <Text>Email: {item.User.email}</Text>
                             <TouchableOpacity
                                 style={styles.bookingbtn}
-                                onPress={() => { handleLoadBooking() }}
+                                onPress={() => { navigation.navigate('Bookings', { item }) }}
                             ><Text
                                 style={{ color: 'white' }}>Đặt lịch hẹn</Text></TouchableOpacity>
 
