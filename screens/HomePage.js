@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
@@ -8,7 +8,8 @@ import User from '../screens/User';
 import { Colors } from '../components/styles';
 const { red } = Colors;
 const Tab = createBottomTabNavigator();
-const HomePage = () => {
+
+const HomePage = ({ route, navigation }) => {
 
     return (
 

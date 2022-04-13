@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
-import axios from 'axios';
-import { URL } from './../constants'
+import { URL } from './../constants';
+import { useContext } from 'react';
+import AppContext from './../components/AppContext';
 import {
     StyleContainer,
     InnerContainer,
@@ -28,35 +29,37 @@ import { Formik } from "formik";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 const { brand, darklight, primary } = Colors;
-const handleLogin = (values, navigation) => {
-    let req = JSON.stringify(values)
 
-    fetch(URL.LOCALHOST + '/api/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: req,
-    })
-        .then(async (res) => {
-            let response = await res.json();
-            if (response.error == 0) {
-                let data = response.userdata
-                navigation.navigate('HomePage', { data });
-            }
-
-        })
-        .catch(e => console.log(e));
-
-}
 
 
 
 const Login = ({ navigation }) => {
-    const [hidePassword, setHidePassword] = useState(true);
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
+    const myContext = useContext(AppContext);
+    const handleLogin = (values, navigation) => {
+        let req = JSON.stringify(values);
 
+
+        fetch(URL.LOCALHOST + '/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: req,
+        })
+            .then(async (res) => {
+                let response = await res.json();
+                if (response.error == 0) {
+                    let data = response.userdata;
+                    myContext.goUser(data);
+                    navigation.navigate('HomePage');
+                }
+
+            })
+            .catch(e => console.log(e));
+
+    }
+
+    const [hidePassword, setHidePassword] = useState(true);
     return (
         <StyleContainer>
             <StatusBar style="auto"></StatusBar>

@@ -4,6 +4,7 @@ import Login from './../screens/Login';
 import Signup from './../screens/Signup';
 import HomePage from '../screens/HomePage';
 import DetailHouse from '../screens/DetailHouse';
+import Home from '../screens/Home';
 import { Colors } from '../components/styles';
 import Bookings from '../screens/Bookings';
 const { teritary } = Colors
@@ -22,11 +23,12 @@ const RootStack = () => {
 
 
                 }}
-                initialRouteName='HomePage'>
+                initialRouteName='Login'>
 
 
                 <Stack.Screen name='Signup' component={Signup} />
                 <Stack.Screen name='HomePage' component={HomePage} />
+                <Stack.Screen name='Home' component={Home} />
                 <Stack.Screen name='Login' component={Login} />
                 <Stack.Screen name='DetailHouse' component={DetailHouse} />
                 <Stack.Screen name='Bookings' component={Bookings} />

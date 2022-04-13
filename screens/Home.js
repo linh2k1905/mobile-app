@@ -1,8 +1,11 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { URL } from '../constants';
-import { styles } from './../components/styles'
+import { styles } from './../components/styles';
+import { useContext } from 'react';
+import AppContext from './../components/AppContext';
 const Home = ({ navigation }) => {
+    const myContext = useContext(AppContext);
 
     const [home, setHome] = useState([]);
     function getAllHouseFromServer() {
