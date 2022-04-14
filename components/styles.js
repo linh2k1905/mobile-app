@@ -85,6 +85,7 @@ font-size:10px;
 z-index:1
 
 `
+
 export const StyleButton = styled.TouchableOpacity`
 padding:10px;
 border-radius:5px;
@@ -139,6 +140,7 @@ export const TextLink = styled.TouchableOpacity`
 justify-content:center;
 align-items:center;
 `
+
 export const TextLinkContent = styled.Text`
 color:${brand}
 font-size:15px;
@@ -219,6 +221,35 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '600'
 
-    }
+    },
+    accountInfo: {
+        fontSize: 16,
+        color: teritary,
+        fontWeight: 'bold'
+    },
+    logout: {
+        alignItems: 'flex-end',
+        marginEnd: 20,
+
+    },
+    acountFunction: {
+        fontSize: 20,
+        color: teritary,
+        fontStyle: 'italic',
+        padding: 20,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.5
+
+    },
+    input: {
+        height: 40,
+        width: '90%',
+        margin: 12,
+        color: teritary,
+        borderWidth: 0.5,
+        padding: 10,
+
+
+    },
 
 });

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity, StatusBar } from 'react-native';
 import { styles, MapHouse } from '../components/styles';
 import MapView from 'react-native-maps';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,7 +14,7 @@ const DetailHouse = ({ route, navigation }) => {
         <ScrollView>
             <TouchableOpacity
                 style={{ marginTop: 10 }}
-                onPress={() => { navigation.navigate('Home'), item }}
+                onPress={() => { navigation.navigate('HomePage'), item }}
             >
                 <Text style={{ color: red }}> <MaterialCommunityIcons name="home" color={red} size={20} /> Về trang chủ</Text>
             </TouchableOpacity>

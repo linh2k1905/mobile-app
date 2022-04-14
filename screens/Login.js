@@ -39,7 +39,7 @@ const Login = ({ navigation }) => {
         let req = JSON.stringify(values);
 
 
-        fetch(URL.LOCALHOST + '/api/login', {
+        fetch(URL.LOCALHOST + '/api/login-from-mobile', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
