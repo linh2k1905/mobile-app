@@ -48,6 +48,7 @@ const User = ({ navigation }) => {
             }
             <View >
                 <TouchableOpacity
+                    onPress={() => navigation.navigate('AcountEdit', userInfo)}
                 >
 
                     <Text style={styles.acountFunction}> <MaterialCommunityIcons name="lead-pencil" size={16} />  Chỉnh sửa thông tin người dùng</Text>

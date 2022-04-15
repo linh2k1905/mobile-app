@@ -222,6 +222,13 @@ export const styles = StyleSheet.create({
         fontWeight: '600'
 
     },
+    label: {
+        color: teritary,
+        fontSize: 20,
+        textAlign: 'left',
+        fontWeight: '600'
+
+    },
     accountInfo: {
         fontSize: 16,
         color: teritary,
@@ -251,5 +258,12 @@ export const styles = StyleSheet.create({
 
 
     },
+    button: {
+        backgroundColor: 'blue',
+        width: 100,
+        borderRadius: 5,
+        padding: 5,
+        justifyContent: 'flex-end'
+    }
 
 });

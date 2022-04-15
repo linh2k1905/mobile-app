@@ -7,6 +7,8 @@ import DetailHouse from '../screens/DetailHouse';
 import Home from '../screens/Home';
 import { Colors } from '../components/styles';
 import Bookings from '../screens/Bookings';
+import AcountEdit from '../screens/AcountEdit';
+import House from '../screens/House';
 const { teritary } = Colors
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +34,8 @@ const RootStack = () => {
                 <Stack.Screen name='Login' component={Login} />
                 <Stack.Screen name='DetailHouse' component={DetailHouse} />
                 <Stack.Screen name='Bookings' component={Bookings} />
+                <Stack.Screen name='AcountEdit' component={AcountEdit} />
+                <Stack.Screen name='House' component={House} />
 
             </Stack.Navigator>
 

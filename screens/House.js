@@ -1,21 +1,63 @@
-import react from 'react-native'
-import { View, Text, TextInput } from 'react-native'
+import react, { useState } from 'react'
+import { View, Text, SafeAreaView, Picker, StatusBar, TouchableOpacity } from 'react-native'
 import { styles } from '../components/styles';
-
 const House = () => {
+    const [selectedValue, setSelectedValue] = useState("java");
+    const [selectedLanguage, setSelectedLanguage] = useState();
+    const heightStatus = StatusBar.currentHeight;
     return (
 
-        <View
-            style={{ flex: 1, alignItems: 'center' }}
+        <SafeAreaView
+            style={{ flex: 1, alignItems: 'flex-start', top: heightStatus + 10 }}
         >
-            <Text style={styles.title}>Đây là trang tìm kiếm của trọ 123</Text>
-            <Text style={styles.title}>Bắt đầu tìm kiếm</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="useless placeholder"
 
-            />
-        </View>
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            </View>
+            <View style={{ padding: 10, width: '100%' }}>
+                <Text style={styles.label}>Chọn thành phố</Text>
+                <Picker
+                    selectedValue={selectedValue}
+                    style={{ height: 50, width: '100%', alignItems: 'center' }}
+                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+                    <Picker.Item label="Java" value="java" />
+                    <Picker.Item label="JavaScript" value="js" />
+                </Picker>
+                <Text style={styles.label}>Chọn giá</Text>
+                <Picker
+                    selectedValue={selectedValue}
+                    style={{ height: 50, width: '100%' }}
+                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+                    <Picker.Item label="Java" value="java" />
+                    <Picker.Item label="JavaScript" value="js" />
+                </Picker>
+                <Text style={styles.label}>Chọn diện tích</Text>
+                <Picker
+                    selectedValue={selectedValue}
+                    style={{ height: 50, width: '100%' }}
+                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+                    <Picker.Item label="Java" value="java" />
+                    <Picker.Item label="JavaScript" value="js" />
+                </Picker>
+                <Text style={styles.label}>Chọn loại phòng</Text>
+                <Picker
+                    selectedValue={selectedValue}
+                    style={{ height: 60, width: '100%' }}
+                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+                    <Picker.Item label="Java" value="java" />
+                    <Picker.Item label="JavaScript" value="js" />
+                </Picker>
+                <TouchableOpacity
+                    style={styles.button}>
+                    <Text >Touch button</Text>
+                </TouchableOpacity>
+
+            </View>
+
+        </SafeAreaView>
     )
 }
 export default House;
