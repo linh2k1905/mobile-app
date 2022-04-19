@@ -173,24 +173,32 @@ export const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     titleInfoHouse: {
-        color: 'red',
+        color: teritary,
         fontWeight: 'bold',
 
     },
+    infoPrice: {
+        backgroundColor: 'blue'
+
+    },
+    infoPriceText: {
+        color: 'white'
+
+    },
     titleInfoHouseDetail: {
-        color: 'red',
+        color: teritary,
         fontWeight: 'bold',
         fontSize: 30,
         paddingBottom: 10,
         alignItems: 'center'
     },
     priceInfoHouse: {
-        color: 'blue',
+        color: teritary,
         fontWeight: 'bold'
     },
     cityInfoHouse: {
-        color: 'green',
-        fontWeight: '400'
+        color: 'blue',
+        fontWeight: 'bold'
 
     },
     addressInfoHouse: {

@@ -6,7 +6,7 @@ import House from '../screens/House';
 import NewPost from '../screens/NewPost';
 import User from '../screens/User';
 import { Colors } from '../components/styles';
-const { red } = Colors;
+const { red, teritary } = Colors;
 const Tab = createBottomTabNavigator();
 
 const HomePage = ({ route, navigation }) => {
@@ -15,15 +15,23 @@ const HomePage = ({ route, navigation }) => {
 
 
         <Tab.Navigator
+            screenOptions={{
+                headerShown: false,
+                tabBarActiveBackgroundColor: 'white',
+                tabBarActiveTintColor: 'blue',
+                tabBarInactiveTintColor: 'gray',
+
+            }}
         >
             <Tab.Screen name="Home"
                 component={Home}
+
 
                 options={
                     {
                         title: 'Trang chủ',
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home" color={red} size={size} />
+                            <MaterialCommunityIcons name="home" color={'#00008B'} size={size} />
                         ),
                     }
                 }
@@ -35,7 +43,7 @@ const HomePage = ({ route, navigation }) => {
                     {
                         title: 'Tìm trọ',
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home-search-outline" color={red} size={size} />
+                            <MaterialCommunityIcons name="home-search-outline" color={'#00008B'} size={size} />
                         ),
                     }
                 }
@@ -47,7 +55,10 @@ const HomePage = ({ route, navigation }) => {
                     {
                         title: 'Tin',
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="newspaper-plus" color={red} size={size} />
+
+                            <MaterialCommunityIcons
+
+                                name="newspaper-plus" color={'#00008B'} size={size} />
                         ),
                     }
                 }
@@ -59,7 +70,7 @@ const HomePage = ({ route, navigation }) => {
                     {
                         title: 'Tài khoản',
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="account" color={red} size={size} />
+                            <MaterialCommunityIcons name="account" color={'#00008B'} size={size} />
                         ),
                     }
                 }

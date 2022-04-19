@@ -1,10 +1,36 @@
 import react, { useState } from 'react'
 import { View, Text, SafeAreaView, Picker, StatusBar, TouchableOpacity } from 'react-native'
 import { styles } from '../components/styles';
+import { URL } from './../constants'
 const House = () => {
-    const [selectedValue, setSelectedValue] = useState("java");
-    const [selectedLanguage, setSelectedLanguage] = useState();
+    const [selectedValue, setSelectedValue] = useState("City");
+    const [city, setCity] = useState();
     const heightStatus = StatusBar.currentHeight;
+    fetch(URL.LOCALHOST + '/api/getCity')
+        .then(async res => {
+            let response = await res.json();
+            let data = response.data
+            setCity(data);
+        });
+    function CitySelection() {
+
+        return (
+            <Picker
+                selectedValue={selectedValue}
+                style={{ height: 50, width: '100%', alignItems: 'center' }}
+                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+            >
+                {city && city.map((item) => {
+                    return (
+                        <Picker.Item value={item.id} label={item.name}></Picker.Item>
+                    )
+
+                })}
+
+            </Picker>
+        )
+
+    }
     return (
 
         <SafeAreaView
@@ -15,14 +41,10 @@ const House = () => {
             </View>
             <View style={{ padding: 10, width: '100%' }}>
                 <Text style={styles.label}>Chọn thành phố</Text>
-                <Picker
-                    selectedValue={selectedValue}
-                    style={{ height: 50, width: '100%', alignItems: 'center' }}
-                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                >
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="JavaScript" value="js" />
-                </Picker>
+
+
+                {CitySelection()}
+
                 <Text style={styles.label}>Chọn giá</Text>
                 <Picker
                     selectedValue={selectedValue}

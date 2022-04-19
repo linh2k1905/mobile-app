@@ -1,7 +1,7 @@
 import react from 'react'
 import { StatusBar, SafeAreaView } from 'react-native'
 const AcountEdit = () => {
-    let heightLine = StatusBar.currentHeight;
+
 
     return (
 

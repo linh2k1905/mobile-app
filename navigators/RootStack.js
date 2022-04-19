@@ -9,8 +9,10 @@ import { Colors } from '../components/styles';
 import Bookings from '../screens/Bookings';
 import AcountEdit from '../screens/AcountEdit';
 import House from '../screens/House';
+
 const { teritary } = Colors
 const Stack = createNativeStackNavigator();
+
 
 const RootStack = () => {
     return (
@@ -25,7 +27,7 @@ const RootStack = () => {
 
 
                 }}
-                initialRouteName='Login'>
+                initialRouteName='House'>
 
 
                 <Stack.Screen name='Signup' component={Signup} />

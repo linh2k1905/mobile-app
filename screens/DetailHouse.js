@@ -3,7 +3,8 @@ import { styles, MapHouse } from '../components/styles';
 import MapView from 'react-native-maps';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors, ContentImageAndGetBook, ContentGetBooking } from '../components/styles';
-const { red } = Colors;
+const { teritary } = Colors;
+import { heightLine } from './../constants'
 const DetailHouse = ({ route, navigation }) => {
     let { item } = route.params;
     let lat = parseFloat(item.lat);
@@ -13,10 +14,14 @@ const DetailHouse = ({ route, navigation }) => {
     return (
         <ScrollView>
             <TouchableOpacity
-                style={{ marginTop: 10 }}
+                style={{
+                    marginTop: heightLine + 10,
+                    width: 200,
+                    height: 20
+                }}
                 onPress={() => { navigation.navigate('HomePage'), item }}
             >
-                <Text style={{ color: red }}> <MaterialCommunityIcons name="home" color={red} size={20} /> Về trang chủ</Text>
+                <Text style={{ color: teritary }}> <MaterialCommunityIcons name="home" color={teritary} size={20} /> Về trang chủ</Text>
             </TouchableOpacity>
             <View
                 style={styles.containerHouseDetail}
