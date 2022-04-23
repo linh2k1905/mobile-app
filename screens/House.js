@@ -1,40 +1,72 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, Picker, ScrollView, StatusBar, TouchableOpacity, Image } from 'react-native'
 import { styles } from '../components/styles';
 import { URL } from './../constants';
 import Slider from '@react-native-community/slider';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-const House = () => {
+import { useContext } from 'react';
+import AppContext from './../components/AppContext';
+const House = ({ navigation }) => {
+
+    const myContext = useContext(AppContext);
     const [selectedValueCity, setSelectedValueCity] = useState();
     const [selectedValuePrice, setSelectedValuePrice] = useState(0);
-    const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState();
+    const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState('Choose');
     const [selectedValueArea, setSelectedValueArea] = useState(0);
-    const [city, setCity] = useState();
-    const [typeHouse, setTypeHouse] = useState();
     const [filterHouse, setFilterHouse] = useState([]);
+
     const heightStatus = StatusBar.currentHeight;
-    if (!city) {
-        fetch(URL.LOCALHOST + '/api/getCity')
-            .then(async res => {
-                let response = await res.json();
-                let data = response.data
-                setCity(data);
-            }).catch(err => { console.log(err) });
-    }
-    if (!typeHouse) {
-        fetch(URL.LOCALHOST + '/api/getTypeHouse')
-            .then(async res => {
 
-                let response = await res.json();
-                let data = response.data;
-                setTypeHouse(data);
+    const fetchAllCity = async () => {
+        try {
+            let data = await fetch(URL.LOCALHOST + '/api/getCity',
+                {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                    }
+                }
+            )
+            let res = await data.json();
+            myContext.setCity(res.data);
 
-            }).catch(err => { console.log(err) });
+
+        } catch (error) {
+            console.log(error)
+        }
     }
+    const fetchAllTypeHouse = async () => {
+        try {
+            setTimeout(() => {
+
+
+
+            }, 6000);
+            fetch(URL.LOCALHOST + '/api/getTypeHouse')
+                .then(async res => {
+                    let data = await res.json();
+                    myContext.setTypeHouseAll(data.data);
+                })
+
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+
+        fetchAllTypeHouse();
+        fetchAllCity();
+
+    }, []);
+
     function getAllHouseSearch(cityId, typeHouseId, area, price) {
 
-
-        fetch(URL.LOCALHOST + `/api/get-filter-house-from-home?idTypeHouse=${encodeURIComponent(typeHouseId)}&idCity=${encodeURIComponent(cityId)}&price=${encodeURIComponent(price)}&area=${encodeURIComponent(area)}`,
+        const url = URL.LOCALHOST + `/api/get-filter-house-from-home?idTypeHouse=${encodeURIComponent(typeHouseId)}&idCity=${encodeURIComponent(cityId)}&price=${encodeURIComponent(price)}&area=${encodeURIComponent(area)}`;
+        console.log(url);
+        fetch(url,
             {
                 method: 'GET',
                 headers: {
@@ -47,13 +79,14 @@ const House = () => {
                 let response = await res.json();
                 let data = response.data;
                 setFilterHouse(data);
-                console.log(filterHouse);
 
 
             }).catch(err => { console.log(err) });
     }
 
+
     return (
+
 
         <SafeAreaView
             style={{ flex: 1, alignItems: 'flex-start', top: heightStatus + 10 }}
@@ -71,7 +104,7 @@ const House = () => {
                                 style={{ height: 50, width: '100%', alignItems: 'center' }}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValueCity(itemValue)}
                             >
-                                {city && city.map((item, index) => {
+                                {myContext.city && myContext.city.map((item, index) => {
                                     return (
                                         <Picker.Item key={index} value={item.id} label={item.name}></Picker.Item>
                                     )
@@ -80,14 +113,14 @@ const House = () => {
 
                             </Picker>
                         </View>
-                        <View style={{ right: 0, width: '50%' }}>
+                        <View style={{ width: '50%' }}>
                             <Text style={styles.label}>Loại nhà</Text>
                             <Picker
                                 selectedValue={selectedValueTypeHouse}
                                 style={{ height: 50, width: '100%', alignItems: 'center' }}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValueTypeHouse(itemValue)}
                             >
-                                {typeHouse && typeHouse.map((item, index) => {
+                                {myContext.typeHouseAll && myContext.typeHouseAll.map((item, index) => {
                                     return (
                                         <Picker.Item key={index} value={item.id} label={item.nameVi}></Picker.Item>
                                     )
@@ -118,7 +151,7 @@ const House = () => {
                         style={{ width: 200, height: 40 }}
                         minimumValue={0}
                         maximumValue={10}
-                        value={2}
+                        value={0}
                         minimumTrackTintColor='red'
                         maximumTrackTintColor="#000000"
                         onValueChange={(value) => setSelectedValuePrice(parseInt(value))}
@@ -130,38 +163,40 @@ const House = () => {
                         <Text >Tìm kiếm   <MaterialCommunityIcons name="home-search" color={'#00008B'} size={20} /></Text>
                     </TouchableOpacity>
 
+                </View >
+                <View style={{ flexDirection: 'row', padding: 10 }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'red' }}>Hiển thị kết quả gợi ý </Text>
                 </View>
                 <View>
-                    <Text style={styles.title}>Hiển thị kết quả gợi ý </Text>
-                </View>
+                    {filterHouse.length > 0 && filterHouse.map((item, index) => {
+                        return (
 
-                {filterHouse && filterHouse.map((item, index) => {
-                    return (
-                        <TouchableOpacity
-                            style={{ width: 500, height: 500, borderBottomColor: 'red' }}
-                            key={index}
-                            onPress={() => { navigation.navigate('DetailHouse', { item }) }}
-                        >
-                            <View>
+                            <View
+                                style={{ width: 600, height: 250 }}
+                                index={index}
+                            >
                                 <View ><Text style={styles.titleInfoHouse}>Tên nhà trọ:{item.name}</Text></View>
                                 <View ><Text style={styles.infoPriceText} >Giá: {item.price / 1000000} Triệu</Text></View>
                                 <View ><Text style={styles.addressInfoHouse}>Địa chỉ: {item.address}</Text></View>
                                 <View><Text style={styles.cityInfoHouse} >Thành phố: {item.City.name} </Text></View>
+                                <Image
+                                    source={{
+                                        uri: item.image
+                                    }}
+                                    style={{
+                                        width: 200,
+                                        height: 150,
+                                        resizeMode: 'cover',
+                                    }
+                                    }
+                                />
+
                             </View>
-                            <Image
-
-                                source={{
-                                    uri: item.image
 
 
-                                }}
-
-                            />
-                        </TouchableOpacity>
-
-                    )
-                })}
-
+                        )
+                    })}
+                </View>
 
             </ScrollView>
         </SafeAreaView>
