@@ -36,15 +36,16 @@ const { brand, darklight, primary } = Colors;
 const Login = ({ navigation }) => {
     const myContext = useContext(AppContext);
     const handleLogin = (values, navigation) => {
-        let req = JSON.stringify(values);
-
-
-        fetch(URL.LOCALHOST + '/api/login-from-mobile', {
+        console.log(values);
+        const r = JSON.stringify(values);
+        fetch(URL.LOCALHOST + '/api/login', {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
+
             },
-            body: req,
+            body: r,
         })
             .then(async (res) => {
                 let response = await res.json();

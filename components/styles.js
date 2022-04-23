@@ -272,6 +272,12 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 5,
         justifyContent: 'flex-end'
+    },
+    litle: {
+        color: teritary,
+        fontSize: 15,
+        textAlign: 'left',
+        fontWeight: '600'
     }
 
 });

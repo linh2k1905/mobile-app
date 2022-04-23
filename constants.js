@@ -1,5 +1,5 @@
 import { StatusBar } from "react-native";
 export const URL = {
-    LOCALHOST: "http://192.168.1.8:8080"
+    LOCALHOST: "https://nhatrovn2k.herokuapp.com"
 }
 export const heightLine = StatusBar.currentHeight;

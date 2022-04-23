@@ -41,7 +41,7 @@ const handleSignup = (values, navigation) => {
         .then(async (res) => {
             let response = await res.json();
             if (response.errorCode == 0) {
-                console.log(response);
+
                 navigation.navigate('Login');
             }
 
