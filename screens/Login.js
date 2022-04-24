@@ -36,9 +36,9 @@ const { brand, darklight, primary } = Colors;
 const Login = ({ navigation }) => {
     const myContext = useContext(AppContext);
     const handleLogin = (values, navigation) => {
-        console.log(values);
         const r = JSON.stringify(values);
-        fetch(URL.LOCALHOST + '/api/login', {
+        console.log(r);
+        fetch(URL.LOCALHOST + '/api/login-from-mobile', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -27,7 +27,7 @@ const RootStack = () => {
 
 
                 }}
-                initialRouteName='House'>
+                initialRouteName='Login'>
 
 
                 <Stack.Screen name='Signup' component={Signup} />

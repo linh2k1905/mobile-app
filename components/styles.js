@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import { withTheme } from 'styled-components';
-
+import { heightLine } from './../constants'
 export const Colors = {
     primary: "#ffffff",
     secondary: "#E5E7EB",
@@ -244,8 +244,8 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     logout: {
-        alignItems: 'flex-end',
-        marginEnd: 20,
+        marginTop: heightLine + 10
+
 
     },
     acountFunction: {
@@ -265,6 +265,15 @@ export const styles = StyleSheet.create({
         borderWidth: 0.5,
         padding: 10,
 
+
+    },
+    inputEdit: {
+
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        borderColor: teritary
 
     },
     button: {
