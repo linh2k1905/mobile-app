@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, Picker, ScrollView, StatusBar, TouchableOpacity, Image } from 'react-native'
-import { styles } from '../components/styles';
+import { styles, Colors } from '../components/styles';
 import { URL } from './../constants';
 import Slider from '@react-native-community/slider';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useContext } from 'react';
 import AppContext from './../components/AppContext';
+const { teritary } = Colors;
+import { heightLine } from './../constants'
 const House = ({ navigation }) => {
 
     const myContext = useContext(AppContext);
@@ -64,8 +66,7 @@ const House = ({ navigation }) => {
 
     function getAllHouseSearch(cityId, typeHouseId, area, price) {
 
-        const url = URL.LOCALHOST + `/api/get-filter-house-from-home?idTypeHouse=${encodeURIComponent(typeHouseId)}&idCity=${encodeURIComponent(cityId)}&price=${encodeURIComponent(price)}&area=${encodeURIComponent(area)}`;
-        console.log(url);
+        const url = URL.LOCALHOST + `/api/get-filter-house-from-home-mobile?idTypeHouse=${encodeURIComponent(typeHouseId)}&idCity=${encodeURIComponent(cityId)}&price=${encodeURIComponent(price)}&area=${encodeURIComponent(area)}`;
         fetch(url,
             {
                 method: 'GET',
@@ -81,6 +82,7 @@ const House = ({ navigation }) => {
                 setFilterHouse(data);
 
 
+
             }).catch(err => { console.log(err) });
     }
 
@@ -92,6 +94,25 @@ const House = ({ navigation }) => {
             style={{ flex: 1, alignItems: 'flex-start', top: heightStatus + 10 }}
         >
             <ScrollView>
+                <TouchableOpacity
+                    style={{
+
+                        width: '100%',
+                        height: 20
+                    }}
+                    onPress={() => { navigation.navigate('HomePage') }}
+                >
+                    <View style={{ width: '100%', height: 30, backgroundColor: teritary, flexDirection: 'row' }}>
+
+
+                        <MaterialCommunityIcons
+                            name="chevron-left"
+                            color='white' size={30}
+
+                        />
+                        <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
+                            Về trang chủ</Text></View>
+                </TouchableOpacity>
 
 
                 <View style={{ padding: 10, width: '100%' }}>
@@ -138,7 +159,7 @@ const House = ({ navigation }) => {
                         maximumValue={40}
                         minimumTrackTintColor='red'
                         maximumTrackTintColor="#000000"
-                        value={20}
+                        value={0}
                         step={1}
                         onValueChange={(value) => setSelectedValueArea(parseInt(value))}
                     />
@@ -167,36 +188,36 @@ const House = ({ navigation }) => {
                 <View style={{ flexDirection: 'row', padding: 10 }}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'red' }}>Hiển thị kết quả gợi ý </Text>
                 </View>
-                <View>
-                    {filterHouse.length > 0 && filterHouse.map((item, index) => {
-                        return (
 
-                            <View
-                                style={{ width: 600, height: 250 }}
-                                index={index}
-                            >
-                                <View ><Text style={styles.titleInfoHouse}>Tên nhà trọ:{item.name}</Text></View>
-                                <View ><Text style={styles.infoPriceText} >Giá: {item.price / 1000000} Triệu</Text></View>
-                                <View ><Text style={styles.addressInfoHouse}>Địa chỉ: {item.address}</Text></View>
-                                <View><Text style={styles.cityInfoHouse} >Thành phố: {item.City.name} </Text></View>
-                                <Image
-                                    source={{
-                                        uri: item.image
-                                    }}
-                                    style={{
-                                        width: 200,
-                                        height: 150,
-                                        resizeMode: 'cover',
-                                    }
-                                    }
-                                />
+                {filterHouse.length > 0 && filterHouse.map((item, index) => {
+                    return (
 
-                            </View>
+                        <View
+                            style={{ width: '100%', height: 250, borderColor: teritary, borderWidth: 0.5, padding: 5 }}
+                            key={index}
+                        >
+                            <View ><Text style={styles.titleInfoHouse}>Tên nhà trọ:{item.name}</Text></View>
+                            <View ><Text style={styles.infoPriceText} >Giá: {item.price / 1000000} Triệu</Text></View>
+                            <View ><Text style={styles.addressInfoHouse}>Địa chỉ: {item.address}</Text></View>
+                            <View><Text style={styles.cityInfoHouse} >Thành phố: {item.City.name} </Text></View>
+                            <Image
+                                source={{
+                                    uri: item.image
+                                }}
+                                style={{
+                                    width: 200,
+                                    height: 150,
+                                    resizeMode: 'cover',
+                                }
+                                }
+                            />
+
+                        </View>
 
 
-                        )
-                    })}
-                </View>
+                    )
+                })}
+
 
             </ScrollView>
         </SafeAreaView>

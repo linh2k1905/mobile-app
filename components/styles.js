@@ -182,7 +182,8 @@ export const styles = StyleSheet.create({
 
     },
     infoPriceText: {
-        color: 'white'
+        color: 'red',
+        fontWeight: 'bold'
 
     },
     titleInfoHouseDetail: {
@@ -234,7 +235,7 @@ export const styles = StyleSheet.create({
         color: teritary,
         fontSize: 20,
         textAlign: 'left',
-        fontWeight: '600'
+        fontWeight: 'bold'
 
     },
     accountInfo: {
