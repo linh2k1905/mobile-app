@@ -1,6 +1,6 @@
-import { View, Text, SafeAreaView, StatusBar } from 'react-native'
+import { View, Text, SafeAreaView, Picker, StatusBar } from 'react-native'
 import { styles } from '../components/styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import moment from 'moment';
 
 
@@ -16,21 +16,28 @@ const Bookings = ({ route, navigation }) => {
                 let today = `Today - ${ddMM}`;
                 obj.label = today;
             }
-            else obj.label = moment(new Date()).add(i, 'days').locale('en').format('dddd - DD/MM');
+            else obj.label = moment(new Date()).add(i, 'days').locale('vi').format('dddd - DD/MM');
             obj.value = moment(new Date()).add(i, 'days').startOf('day').valueOf();
             allDays.push(obj);
 
         }
+        useEffect(() => {
+
+        })
 
         return (
-            allDays && allDays.length && allDays.map((item) => {
-                return (
-                    <View>
-                        <Text>{item.label}</Text>
-                    </View>
-                )
-            })
 
+            <Picker
+
+            >
+                {allDays && allDays.map((item, index) => {
+                    return (
+                        <Picker.Item key={index} value={item.value} label={item.label}></Picker.Item>
+                    )
+
+                })}
+
+            </Picker>
         )
     }
     return (
@@ -39,14 +46,18 @@ const Bookings = ({ route, navigation }) => {
             style={styles.body}>
             <View
             >
-                <Text style={styles.title}>Đặt lịch hẹn</Text>
-                <Text>Tên nhà trọ: {item.name}</Text>
-                <Text>Địa chỉ: {item.address}</Text>
-                <Text>Sđt chủ trọ: {item.User.tel}</Text>
-                <Text>Email: {item.User.email}</Text>
+                <Text style={styles.label}>Đặt lịch hẹn</Text>
+                <Text style={styles.textBold}>Tên nhà trọ: {item.name}</Text>
+                <Text style={styles.textBold}>Địa chỉ: {item.address}</Text>
+                <Text style={styles.textBold}>Tel: {item.User.tel}</Text>
+                <Text style={styles.textBold}>Mail: {item.User.email}</Text>
 
             </View>
-            {setArrayTime()}
+            <View>
+                <Text style={styles.label}> Chọn ngày</Text>
+                {setArrayTime()}
+            </View>
+
 
         </SafeAreaView>
     )

@@ -288,6 +288,11 @@ export const styles = StyleSheet.create({
         fontSize: 15,
         textAlign: 'left',
         fontWeight: '600'
+    },
+    textBold: {
+        fontWeight: 'bold',
+        color: teritary
+
     }
 
 });
