@@ -221,7 +221,9 @@ export const styles = StyleSheet.create({
 
     },
     body: {
-        margin: StatusBar.currentHeight + 10,
+        marginTop: StatusBar.currentHeight + 10,
+        width: "100%",
+        height: "100%"
     },
 
     title: {
@@ -261,8 +263,9 @@ export const styles = StyleSheet.create({
         height: 40,
         width: '90%',
         margin: 12,
+        marginRight: 20,
         color: teritary,
-        borderWidth: 0.5,
+        borderWidth: 1,
         padding: 10,
 
 
