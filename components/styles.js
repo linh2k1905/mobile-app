@@ -247,6 +247,14 @@ export const styles = StyleSheet.create({
         padding: 10
 
     },
+    titlePost: {
+        color: teritary,
+        fontSize: 30,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        padding: 10
+
+    },
     label: {
         color: teritary,
         fontSize: 20,
@@ -292,6 +300,30 @@ export const styles = StyleSheet.create({
 
 
     },
+    inputTextArea: {
+        height: 50,
+        width: '90%',
+        margin: 12,
+        marginRight: 20,
+        color: teritary,
+        borderWidth: 0.5,
+        borderRadius: 5,
+        padding: 10,
+
+
+    },
+    inputPrice: {
+        height: 38,
+        width: '90%',
+        margin: 12,
+        marginRight: 20,
+        color: teritary,
+        borderWidth: 0.5,
+        borderRadius: 5,
+        padding: 10,
+
+
+    },
     inputEdit: {
 
         height: 40,
@@ -306,6 +338,14 @@ export const styles = StyleSheet.create({
         width: 100,
         height: 30,
         borderRadius: 5,
+        padding: 5,
+        margin: 5
+    },
+    buttonUpload: {
+        backgroundColor: 'gray',
+        width: 100,
+        height: 30,
+        borderRadius: 2,
         padding: 5,
         margin: 5
     },
@@ -353,7 +393,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        padding: 10
     },
     rowRight: {
         flexDirection: 'row',
@@ -389,6 +428,11 @@ export const styles = StyleSheet.create({
         borderColor: 'white',
         borderWidth: 0.5,
         padding: 5
+    },
+    contentInput: {
+        height: "14%",
+        width: '100%',
+
     }
 
 
