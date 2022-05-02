@@ -37,7 +37,6 @@ const Login = ({ navigation }) => {
     const myContext = useContext(AppContext);
     const handleLogin = (values, navigation) => {
         const r = JSON.stringify(values);
-        console.log(r);
         fetch(URL.LOCALHOST + '/api/login-from-mobile', {
             method: 'POST',
             headers: {

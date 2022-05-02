@@ -13,6 +13,8 @@ const Bookings = ({ route, navigation }) => {
     const [timeSelected, setTimeSelected] = useState();
     const [mail, onChangeMailInput] = useState();
     const [time, setTime] = useState();
+    const [password, setPassword] = useState();
+    const [notice, setNotice] = useState();
     function setArrayTime() {
         const allDays = [];
         for (let i = 0; i <= 7; i++) {
@@ -27,11 +29,13 @@ const Bookings = ({ route, navigation }) => {
             allDays.push(obj);
 
         }
-        function getScheduleFromServer(dateStr) {
-            setDateSelected(dateStr);
-            let owner = item.User.id;
 
-            const url = URL.LOCALHOST + `/api/get-schedule-owner?id=${encodeURIComponent(owner)}&date=${encodeURIComponent(dateSelected)}`;
+        function getScheduleFromServer() {
+
+            let owner = item.User.id;
+            console.log(dateSelected);
+            let url = URL.LOCALHOST + `/api/get-schedule-owner?id=${encodeURIComponent(owner)}&date=${encodeURIComponent(dateSelected)}`;
+            console.log(url);
             fetch(url,
                 {
                     method: 'GET',
@@ -43,8 +47,10 @@ const Bookings = ({ route, navigation }) => {
             )
                 .then(async res => {
                     let response = await res.json();
+                    console.log(response);
                     let data = response.data;
-                    setTimeSelected(data);
+                    console.log(data);
+                    if (response.errorCode === 0) setTimeSelected(data);
 
                 }).catch(err => { console.log(err) });
         }
@@ -55,10 +61,14 @@ const Bookings = ({ route, navigation }) => {
 
             <Picker
                 selectedValue={dateSelected}
-                onValueChange={(itemValue, itemIndex) => getScheduleFromServer(itemValue)}
+                onValueChange={(itemValue, itemIndex) => {
+
+                    setDateSelected(itemValue);
+                    getScheduleFromServer()
+                }}
 
             >
-                {allDays && allDays.map((item, index) => {
+                {allDays.length > 0 && allDays.map((item, index) => {
                     return (
                         <Picker.Item key={index} value={item.value} label={item.label}></Picker.Item>
                     )
@@ -67,6 +77,47 @@ const Bookings = ({ route, navigation }) => {
 
             </Picker>
         )
+    }
+
+    function postBooking() {
+        let url = URL.LOCALHOST + "/api/user-booking";
+        console.log(url);
+        let req = {};
+        req.email = mail;
+        req.password = password;
+        req.date = dateSelected.toString();
+        req.time = time;
+        req.idHouse = item.id;
+        req.desc = notice;
+        req.nameOwner = item.User.firstName + item.User.lastName;
+        req.address = item.address;
+        req.name = item.name;
+        req.idHouse = item.id;
+        console.log(req);
+        fetch(url,
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+
+                },
+                body: JSON.stringify(
+
+                    req
+                )
+            }
+
+        )
+            .then(async res => {
+                setTimeout(() => { }, 6000);
+                let response = await res.json();
+                let data = response.data;
+                console.log(data);
+                if (data.errorCode === 0) alert("Đặt lịch thành công");
+
+            }).catch(err => { console.log(err) });
+
     }
     return (
 
@@ -120,14 +171,31 @@ const Bookings = ({ route, navigation }) => {
                 <TextInput
 
                     style={styles.input}
-                    onChangeText={onChangeMailInput}
-                    value={mail}
+                    onChangeText={setPassword}
+                    value={password}
+                ></TextInput>
+            </View>
+            <View style={{ width: "60%" }}>
+                <Text style={styles.label}>Lời nhắn</Text>
+                <TextInput
+
+                    style={styles.input}
+                    value={notice}
+                    onChangeText={setNotice}
+
                 ></TextInput>
             </View>
             <TouchableOpacity
-
-                style={styles.button}>
+                style={styles.button}
+                onPress={() => postBooking()}
+            >
                 <Text>Xác nhận</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('HomePage')}
+            >
+                <Text>Đóng</Text>
             </TouchableOpacity>
 
 

@@ -67,6 +67,7 @@ const House = ({ navigation }) => {
     function getAllHouseSearch(cityId, typeHouseId, area, price) {
 
         const url = URL.LOCALHOST + `/api/get-filter-house-from-home-mobile?idTypeHouse=${encodeURIComponent(typeHouseId)}&idCity=${encodeURIComponent(cityId)}&price=${encodeURIComponent(price)}&area=${encodeURIComponent(area)}`;
+        console.log(url);
         fetch(url,
             {
                 method: 'GET',
