@@ -161,8 +161,12 @@ width:50%;
 export const styles = StyleSheet.create({
     containerHouse: {
         paddingTop: 10,
+        paddingBottom: 20,
         flexDirection: 'row',
-        width: '100%'
+        width: '100%',
+        alignContent: 'center',
+        alignItems: 'center'
+
     },
     containerHouseDetail: {
         marginTop: 10,
@@ -182,12 +186,12 @@ export const styles = StyleSheet.create({
 
     },
     infoPriceText: {
-        color: 'red',
+        color: 'white',
         fontWeight: 'bold'
 
     },
     titleInfoHouseDetail: {
-        color: teritary,
+        color: 'blue',
         fontWeight: 'bold',
         fontSize: 30,
         paddingBottom: 10,
@@ -214,10 +218,12 @@ export const styles = StyleSheet.create({
 
     },
     bookingbtn: {
-        color: "white",
+        color: "gray",
         backgroundColor: "blue",
-        width: 80,
-        marginLeft: 10
+        width: '50%',
+        padding: 5,
+
+
 
     },
     body: {
@@ -233,8 +239,23 @@ export const styles = StyleSheet.create({
         fontWeight: '600'
 
     },
+    titleBooking: {
+        color: teritary,
+        fontSize: 30,
+        textAlign: 'center',
+        fontWeight: '800',
+        padding: 10
+
+    },
     label: {
         color: teritary,
+        fontSize: 20,
+        textAlign: 'left',
+        fontWeight: 'bold'
+
+    },
+    labelBlue: {
+        color: 'blue',
         fontSize: 20,
         textAlign: 'left',
         fontWeight: 'bold'
@@ -260,12 +281,13 @@ export const styles = StyleSheet.create({
 
     },
     input: {
-        height: 40,
+        height: 38,
         width: '90%',
         margin: 12,
         marginRight: 20,
         color: teritary,
-        borderWidth: 1,
+        borderWidth: 0.5,
+        borderRadius: 5,
         padding: 10,
 
 
@@ -280,11 +302,20 @@ export const styles = StyleSheet.create({
 
     },
     button: {
-        backgroundColor: 'blue',
+        backgroundColor: teritary,
         width: 100,
+        height: 30,
         borderRadius: 5,
         padding: 5,
-        justifyContent: 'flex-end'
+        margin: 5
+    },
+    buttonBlue: {
+        backgroundColor: 'blue',
+        width: 100,
+        height: 30,
+        borderRadius: 5,
+        padding: 5,
+        margin: 5,
     },
     litle: {
         color: teritary,
@@ -294,8 +325,72 @@ export const styles = StyleSheet.create({
     },
     textBold: {
         fontWeight: 'bold',
-        color: teritary
+        color: teritary,
+        fontSize: 15,
+        padding: 3
 
+    },
+    comback: {
+        width: '100%',
+        height: 35,
+        backgroundColor: 'blue',
+        flexDirection: 'row',
+        padding: 3
     }
+    ,
+    combackFont: {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+    ,
+    rowLeft: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        padding: 10
+    },
+    rowRight: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        padding: 10
+    },
+    textWhite: {
+        textAlign: 'center',
+        color: 'white',
+        fontWeight: 'bold'
+    },
+    rowWithLeftRight: {
+        flexDirection: 'row',
+        width: '100%'
+    },
+    leftRow: {
+        left: 0,
+        width: '50%',
+        alignContent: 'center'
+    },
+    rightRow: {
+        right: 0,
+        width: '50%'
+    },
+    guess: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'blue'
+    },
+    filterHouse: {
+        width: '100%',
+        height: 250,
+        borderColor: 'white',
+        borderWidth: 0.5,
+        padding: 5
+    }
+
+
 
 });

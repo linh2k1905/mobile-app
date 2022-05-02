@@ -96,14 +96,10 @@ const House = ({ navigation }) => {
         >
             <ScrollView>
                 <TouchableOpacity
-                    style={{
-
-                        width: '100%',
-                        height: 20
-                    }}
+                    style={styles.comback}
                     onPress={() => { navigation.navigate('HomePage') }}
                 >
-                    <View style={{ width: '100%', height: 30, backgroundColor: teritary, flexDirection: 'row' }}>
+                    <View style={styles.comback}>
 
 
                         <MaterialCommunityIcons
@@ -111,16 +107,16 @@ const House = ({ navigation }) => {
                             color='white' size={30}
 
                         />
-                        <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
+                        <Text style={styles.combackFont}>
                             Về trang chủ</Text></View>
                 </TouchableOpacity>
 
 
                 <View style={{ padding: 10, width: '100%' }}>
 
-                    <View style={{ flexDirection: 'row', width: '100%' }}>
-                        <View style={{ left: 0, width: '50%' }}>
-                            <Text style={styles.label}>Thành phố</Text>
+                    <View style={styles.rowWithLeftRight}>
+                        <View style={styles.leftRow}>
+                            <Text style={styles.labelBlue}>Thành phố</Text>
                             <Picker
                                 selectedValue={selectedValueCity}
                                 style={{ height: 50, width: '100%', alignItems: 'center' }}
@@ -135,8 +131,8 @@ const House = ({ navigation }) => {
 
                             </Picker>
                         </View>
-                        <View style={{ width: '50%' }}>
-                            <Text style={styles.label}>Loại nhà</Text>
+                        <View style={styles.rightRow}>
+                            <Text style={styles.labelBlue}>Loại nhà</Text>
                             <Picker
                                 selectedValue={selectedValueTypeHouse}
                                 style={{ height: 50, width: '100%', alignItems: 'center' }}
@@ -152,54 +148,73 @@ const House = ({ navigation }) => {
                             </Picker>
                         </View>
                     </View>
+                    <View style={styles.rowWithLeftRight}>
+                        <View style={styles.leftRow}>
+                            <Text style={styles.labelBlue}>Chọn diện tích</Text>
+                            < Slider
+                                style={{ width: 150, height: 40 }}
+                                minimumValue={0}
+                                maximumValue={60}
+                                minimumTrackTintColor={teritary}
+                                maximumTrackTintColor="blue"
+                                value={0}
+                                step={1}
+                                onValueChange={(value) => setSelectedValueArea(parseInt(value))}
+                            />
+                            <Text style={styles.litle}>{selectedValueArea}m2</Text>
+                        </View>
+                        <View
+                            style={styles.rightRow}
+                        >
+                            <Text style={styles.labelBlue}>Chọn Giá</Text>
 
-                    <Text style={styles.label}>Chọn diện tích</Text>
-                    < Slider
-                        style={{ width: 200, height: 40 }}
-                        minimumValue={0}
-                        maximumValue={40}
-                        minimumTrackTintColor='red'
-                        maximumTrackTintColor="#000000"
-                        value={0}
-                        step={1}
-                        onValueChange={(value) => setSelectedValueArea(parseInt(value))}
-                    />
-                    <Text style={styles.litle}>{selectedValueArea}m2</Text>
 
-                    <Text style={styles.label}>Chọn Giá</Text>
+                            < Slider
+                                style={{ width: 150, height: 40 }}
+                                minimumValue={0}
+                                maximumValue={10}
+                                value={0}
+                                minimumTrackTintColor={teritary}
+                                maximumTrackTintColor="blue"
+                                onValueChange={(value) => setSelectedValuePrice(parseInt(value))}
+                            />
+                            <Text style={styles.litle}>{selectedValuePrice}Triệu</Text>
+                        </View>
+
+                    </View>
 
 
-                    < Slider
-                        style={{ width: 200, height: 40 }}
-                        minimumValue={0}
-                        maximumValue={10}
-                        value={0}
-                        minimumTrackTintColor='red'
-                        maximumTrackTintColor="#000000"
-                        onValueChange={(value) => setSelectedValuePrice(parseInt(value))}
-                    />
-                    <Text style={styles.litle}>{selectedValuePrice}Triệu</Text>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => getAllHouseSearch(selectedValueCity, selectedValueTypeHouse, selectedValueArea, selectedValuePrice)}>
-                        <Text >Tìm kiếm   <MaterialCommunityIcons name="home-search" color={'#00008B'} size={20} /></Text>
-                    </TouchableOpacity>
+                    <View style={styles.rowRight}>
+                        <TouchableOpacity
+                            style={styles.buttonBlue}
+                            onPress={() => getAllHouseSearch(selectedValueCity, selectedValueTypeHouse, selectedValueArea, selectedValuePrice)}>
+                            <View
+                                style={styles.row}
+                            >
+                                <Text style={styles.textWhite}>Tìm kiếm</Text>
+                                <MaterialCommunityIcons name="home-search" color='white' size={20} />
+                            </View>
+
+                        </TouchableOpacity>
+                    </View>
+
 
                 </View >
-                <View style={{ flexDirection: 'row', padding: 10 }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'red' }}>Hiển thị kết quả gợi ý </Text>
+                <View style={{ flexDirection: 'row', padding: 5 }}>
+                    <Text style={styles.guess}>Hiển thị kết quả gợi ý </Text>
                 </View>
 
                 {filterHouse.length > 0 && filterHouse.map((item, index) => {
                     return (
 
-                        <View
-                            style={{ width: '100%', height: 250, borderColor: teritary, borderWidth: 0.5, padding: 5 }}
+                        <TouchableOpacity
+                            style={styles.filterHouse}
                             key={index}
+                            onPress={() => { navigation.navigate('DetailHouse', { item }) }}
                         >
-                            <View ><Text style={styles.titleInfoHouse}>Tên nhà trọ:{item.name}</Text></View>
-                            <View ><Text style={styles.infoPriceText} >Giá: {item.price / 1000000} Triệu</Text></View>
-                            <View ><Text style={styles.addressInfoHouse}>Địa chỉ: {item.address}</Text></View>
+                            <View ><Text style={styles.cityInfoHouse}>Tên nhà trọ:{item.name}</Text></View>
+                            <View ><Text style={styles.cityInfoHouse} >Giá: {item.price / 1000000} Triệu</Text></View>
+                            <View ><Text style={styles.cityInfoHouse}>Địa chỉ: {item.address}</Text></View>
                             <View><Text style={styles.cityInfoHouse} >Thành phố: {item.City.name} </Text></View>
                             <Image
                                 source={{
@@ -213,7 +228,7 @@ const House = ({ navigation }) => {
                                 }
                             />
 
-                        </View>
+                        </TouchableOpacity>
 
 
                     )

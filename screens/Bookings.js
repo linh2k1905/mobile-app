@@ -1,10 +1,13 @@
 import { View, Text, SafeAreaView, Picker, TextInput, TouchableOpacity, Button } from 'react-native'
-import { styles } from '../components/styles';
+import { styles, Colors } from '../components/styles';
 import { useState, useEffect } from 'react';
 import { URL } from './../constants'
 import moment from 'moment';
 import { useContext } from 'react';
 import AppContext from './../components/AppContext';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ScrollView } from 'react-native-gesture-handler';
+const { teritary } = Colors
 const Bookings = ({ route, navigation }) => {
     const { item } = route.params;
     const myContext = useContext(AppContext);
@@ -123,83 +126,127 @@ const Bookings = ({ route, navigation }) => {
 
         <SafeAreaView
             style={styles.body}>
-            <View
-                style={{ width: "100%" }}
-            >
-                <Text style={styles.label}>Đặt lịch hẹn</Text>
-                <Text style={styles.textBold}>Tên nhà trọ: {item.name}</Text>
-                <Text style={styles.textBold}>Địa chỉ: {item.address}</Text>
-                <Text style={styles.textBold}>Tel: {item.User.tel}</Text>
-                <Text style={styles.textBold}>Mail: {item.User.email}</Text>
+            <ScrollView>
+                <View
+                    style={{ width: "100%", padding: 10 }}
+                >
+                    <View
+                        style={
+                            styles.row
+                        }
+                    >
+                        <MaterialCommunityIcons
+                            name="calendar-heart"
+                            color=
+                            {teritary} size={30}
 
-            </View>
-            <View>
-                <Text style={styles.label}> Chọn ngày</Text>
-                {setArrayTime()}
-            </View>
-            <Text style={styles.label}> Chọn giờ</Text>
+                        />
+                        <Text style={styles.titleBooking}>Đặt lịch hẹn</Text>
+                    </View>
+                    <Text style={styles.textBold}>Tên nhà trọ: {item.name}</Text>
+                    <Text style={styles.textBold}>Địa chỉ: {item.address}</Text>
+                    <Text style={styles.textBold}>Tel: {item.User.tel}</Text>
+                    <Text style={styles.textBold}>Mail: {item.User.email}</Text>
 
-            <Picker
-                selectedValue={time}
-                onValueChange={(itemValue, itemIndex) => setTime(itemValue)}
-                style={{
-                    width: "50%",
-                }}
+                </View>
+                <View>
+                    <Text style={styles.label}> Chọn ngày</Text>
+                    {setArrayTime()}
+                </View>
+                <Text style={styles.label}> Chọn giờ</Text>
 
-            >
-                {timeSelected && timeSelected.map((i, index) => {
-                    return (
+                <Picker
+                    selectedValue={time}
+                    onValueChange={(itemValue, itemIndex) => setTime(itemValue)}
+                    style={{
+                        width: "50%",
+                    }}
 
-                        <Picker.Item key={index} value={i.time} label={i.time}></Picker.Item>
-                    )
-                })
-                }
+                >
+                    {timeSelected && timeSelected.map((i, index) => {
+                        return (
 
-            </Picker>
+                            <Picker.Item key={index} value={i.time} label={i.time}></Picker.Item>
+                        )
+                    })
+                    }
 
-            <View style={{ width: "70%" }}>
-                <Text style={styles.label}>Nhập email để xác nhận</Text>
-                <TextInput
+                </Picker>
 
-                    style={styles.input}
-                    onChangeText={onChangeMailInput}
-                    value={mail}
-                ></TextInput>
-            </View>
-            <View style={{ width: "70%" }}>
-                <Text style={styles.label}>Nhập mật khẩu</Text>
-                <TextInput
+                <View style={{ width: "100%" }}>
+                    <View style={styles.rowLeft}>
 
-                    style={styles.input}
-                    onChangeText={setPassword}
-                    value={password}
-                ></TextInput>
-            </View>
-            <View style={{ width: "60%" }}>
-                <Text style={styles.label}>Lời nhắn</Text>
-                <TextInput
+                        <MaterialCommunityIcons
+                            name="email"
+                            color={teritary} size={25}
 
-                    style={styles.input}
-                    value={notice}
-                    onChangeText={setNotice}
-
-                ></TextInput>
-            </View>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => postBooking()}
-            >
-                <Text>Xác nhận</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate('HomePage')}
-            >
-                <Text>Đóng</Text>
-            </TouchableOpacity>
+                        />
+                        <Text style={styles.label}> Nhập email để xác nhận </Text>
+                    </View>
 
 
+                    <TextInput
 
+                        style={styles.input}
+                        onChangeText={onChangeMailInput}
+                        value={mail}
+                    ></TextInput>
+                </View>
+                <View style={{ width: "100%" }}>
+                    <View style={styles.rowLeft}>
+                        <MaterialCommunityIcons
+                            name="lock-open-alert"
+                            color={teritary} size={25}
+
+                        />
+                        <Text style={styles.label}> Nhập mật khẩu </Text>
+                    </View>
+
+                    <TextInput
+
+                        style={styles.input}
+                        onChangeText={setPassword}
+                        value={password}
+                        secureTextEntry={true}
+                    ></TextInput>
+                </View>
+                <View style={{ width: "100%" }}>
+                    <View style={styles.rowLeft}>
+                        <MaterialCommunityIcons
+                            name="lead-pencil"
+                            color={teritary} size={25}
+
+                        />
+                        <Text style={styles.label}> Lời nhắn</Text>
+                    </View>
+
+                    <TextInput
+
+                        style={styles.input}
+                        value={notice}
+                        onChangeText={setNotice}
+
+                    ></TextInput>
+                </View>
+                <View style={styles.rowRight}>
+
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => postBooking()}
+                    >
+                        <Text style={styles.textWhite}>Xác nhận</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => navigation.navigate('HomePage')}
+                    >
+                        <Text style={styles.textWhite}>Đóng</Text>
+                    </TouchableOpacity>
+                </View>
+
+
+
+            </ScrollView>
         </SafeAreaView >
     )
 }

@@ -17,14 +17,20 @@ const DetailHouse = ({ route, navigation }) => {
         >
             <ScrollView>
                 <TouchableOpacity
-                    style={{
-
-                        width: 200,
-                        height: 20
-                    }}
-                    onPress={() => { navigation.navigate('HomePage'), item }}
+                    style={
+                        styles.comback}
+                    onPress={() => { navigation.navigate('HomePage') }}
                 >
-                    <Text style={{ color: teritary }}> <MaterialCommunityIcons name="home" color={teritary} size={20} /> Về trang chủ</Text>
+                    <View style={styles.comback}>
+
+
+                        <MaterialCommunityIcons
+                            name="chevron-left"
+                            color='white' size={30}
+
+                        />
+                        <Text style={styles.combackFont}>
+                            Về trang chủ</Text></View>
                 </TouchableOpacity>
                 <View
                     style={styles.containerHouseDetail}
@@ -40,28 +46,43 @@ const DetailHouse = ({ route, navigation }) => {
                                 style={styles.imageHouse}
                             />
                             <ContentGetBooking>
-                                <Text>Đặt lịch hẹn</Text>
-                                <Text>Chủ trọ: {item.User.firstName + " " + item.User.lastName}</Text>
+                                <Text style={{
+                                    fontWeight: '400',
+                                    fontSize: 20
+                                }}>Thông tin liên hệ</Text>
+                                <Text>Chủ trọ: {item.User.lastName + " " + item.User.firstName}</Text>
                                 <Text>Số điện thoại: {item.User.tel}</Text>
+
                                 <Text>Email: {item.User.email}</Text>
                                 <TouchableOpacity
                                     style={styles.bookingbtn}
                                     onPress={() => { navigation.navigate('Bookings', { item }) }}
                                 ><Text
-                                    style={{ color: 'white' }}>Đặt lịch hẹn</Text></TouchableOpacity>
+                                    style={{
+                                        color: 'white',
+                                        fontSize: 15
 
+                                    }}>Đặt lịch hẹn</Text>
 
+                                </TouchableOpacity>
+                                <MaterialCommunityIcons
+                                    name="cursor-pointer"
+                                    color='gray' size={20}
 
-
-
+                                />
+                                <Text>Nhấn vào đây để đặt hẹn</Text>
                             </ContentGetBooking>
                         </ContentImageAndGetBook>
-
-                        <View style={styles.infoHouse}><Text style={styles.priceInfoHouse} >Giá: {item.price / 1000000} Triệu</Text></View>
-                        <View style={styles.infoHouse}><Text style={styles.addressInfoHouse}>Địa chỉ: {item.address}</Text></View>
+                        <Text style={{
+                            fontWeight: '600',
+                            fontSize: 20,
+                            color: 'blue'
+                        }}>Thông tin chi tiết</Text>
+                        <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Giá: {item.price / 1000000} Triệu</Text></View>
+                        <View style={styles.infoHouse}><Text style={styles.cityInfoHouse}>Địa chỉ: {item.address}</Text></View>
                         <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Thành phố: {item.City.name} </Text></View>
-                        <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Thành phố: {item.descriptionVi} </Text></View>
-                        <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Thành phố: {item.descriptionEn} </Text></View>
+                        <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Mô tả: {item.descriptionVi} </Text></View>
+                        <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Desc: {item.descriptionEn} </Text></View>
                     </View>
                     <View style={styles.titleInfoHouseDetail}><Text style={styles.titleInfoHouseDetail} >Xem bản đồ </Text></View>
                     <MapHouse>

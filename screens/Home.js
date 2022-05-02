@@ -48,11 +48,13 @@ const Home = ({ navigation }) => {
                                 onPress={() => { navigation.navigate('DetailHouse', { item }) }}
                             >
                                 <View style={styles.imageHouse}>
-                                    <View style={styles.infoHouse}><Text style={styles.titleInfoHouse}>Tên nhà trọ:{item.name}</Text></View>
+                                    <View style={styles.infoPrice}><Text style={styles.infoPriceText}>{item.name}</Text></View>
 
                                     <View style={styles.infoHouse}><Text style={styles.addressInfoHouse}>Địa chỉ: {item.address}</Text></View>
                                     <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Thành phố: {item.City.name} </Text></View>
-                                    <View style={styles.infoPrice}><Text style={styles.infoPriceText} >Giá: {item.price / 1000000} Triệu</Text></View>
+                                    <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Điện thoại: {item.User.tel} </Text></View>
+                                    <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Diện tích: {item.area} m2</Text></View>
+                                    <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Giá: {item.price / 1000000} Triệu</Text></View>
                                 </View>
                                 <Image
 
