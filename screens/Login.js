@@ -27,7 +27,7 @@ import {
 } from './../components/styles';
 import { Formik } from "formik";
 import { StatusBar } from "expo-status-bar";
-import { View } from "react-native";
+import { View, SafeAreaView } from "react-native";
 const { brand, darklight, primary } = Colors;
 
 
@@ -67,6 +67,7 @@ const Login = ({ navigation }) => {
                 <PageLogo
                     resizeMode='cover'
                     source={require('../assets/logo.jpeg')}
+
                 >
                 </PageLogo>
                 <PageTitle>TimPhongTro123</PageTitle>

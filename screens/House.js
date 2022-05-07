@@ -12,9 +12,9 @@ const House = ({ navigation }) => {
 
     const myContext = useContext(AppContext);
     const [selectedValueCity, setSelectedValueCity] = useState();
-    const [selectedValuePrice, setSelectedValuePrice] = useState(0);
-    const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState('Choose');
-    const [selectedValueArea, setSelectedValueArea] = useState(0);
+    const [selectedValuePrice, setSelectedValuePrice] = useState();
+    const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState();
+    const [selectedValueArea, setSelectedValueArea] = useState();
     const [filterHouse, setFilterHouse] = useState([]);
 
     const heightStatus = StatusBar.currentHeight;
@@ -65,27 +65,52 @@ const House = ({ navigation }) => {
     }, []);
 
     function getAllHouseSearch(cityId, typeHouseId, area, price) {
-
-        const url = URL.LOCALHOST + `/api/get-filter-house-from-home-mobile?idTypeHouse=${encodeURIComponent(typeHouseId)}&idCity=${encodeURIComponent(cityId)}&price=${encodeURIComponent(price)}&area=${encodeURIComponent(area)}`;
-        console.log(url);
-        fetch(url,
-            {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json',
+        if ((!typeHouseId || !area || !price) && cityId) {
+            console.log(URL.LOCALHOST + `/api/get-all-home-by-city?idCity=${cityId}`);
+            fetch(URL.LOCALHOST + `/api/get-all-home-by-city?idCity=${cityId}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                    }
                 }
-            }
 
-        )
-            .then(async res => {
-                let response = await res.json();
-                let data = response.data;
-                setFilterHouse(data);
-
+            )
+                .then(async res => {
+                    let response = await res.json();
+                    let data = response.data;
+                    setFilterHouse(data);
 
 
-            }).catch(err => { console.log(err) });
+
+                }).catch(err => { console.log(err) });
+
+
+        }
+
+        else {
+            const url = URL.LOCALHOST + `/api/get-filter-house-from-home-mobile?idTypeHouse=${encodeURIComponent(typeHouseId)}&idCity=${encodeURIComponent(cityId)}&price=${encodeURIComponent(price)}&area=${encodeURIComponent(area)}`;
+            console.log(url);
+            fetch(url,
+                {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                    }
+                }
+
+            )
+                .then(async res => {
+                    let response = await res.json();
+                    let data = response.data;
+                    setFilterHouse(data);
+
+
+
+                }).catch(err => { console.log(err) });
+        }
     }
+
 
 
     return (
