@@ -78,7 +78,7 @@ const House = ({ navigation }) => {
             )
                 .then(async res => {
                     let response = await res.json();
-                    console.log(response.data);
+
                     let data = response.data;
                     setFilterHouse(data);
 
