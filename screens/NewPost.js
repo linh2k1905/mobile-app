@@ -130,8 +130,8 @@ const NewPost = ({ navigation }) => {
                 <View style={styles.row}>
                     <Text style={styles.titlePost}>Tìm bạn cùng phòng </Text>
                     <MaterialCommunityIcons
-                        name="newspaper-plus"
-                        color={teritary} size={30}
+                        name="heart-circle"
+                        color="red" size={30}
 
                     />
                 </View>
@@ -142,10 +142,10 @@ const NewPost = ({ navigation }) => {
                 }}>
                     <View style={styles.contentInput}>
                         <View style={styles.rowLeft}>
-                            <Text style={styles.label}>  Tên nhà trọ  </Text>
+                            <Text style={styles.labelBlue}>  Tên nhà trọ  </Text>
                             <MaterialCommunityIcons
                                 name="home-map-marker"
-                                color={teritary} size={30}
+                                color="blue" size={30}
 
                             />
                         </View>
@@ -159,10 +159,10 @@ const NewPost = ({ navigation }) => {
                     </View>
                     <View style={styles.contentInput}>
                         <View style={styles.rowLeft}>
-                            <Text style={styles.label}>  Địa chỉ  </Text>
+                            <Text style={styles.labelBlue}>  Địa chỉ  </Text>
                             <MaterialCommunityIcons
                                 name="crosshairs-gps"
-                                color={teritary} size={30}
+                                color="blue" size={30}
 
                             />
                         </View>
@@ -176,7 +176,7 @@ const NewPost = ({ navigation }) => {
                     </View>
                     <View style={styles.row}>
                         <View style={styles.leftRow}>
-                            <Text style={styles.label}>  Giá tiền</Text>
+                            <Text style={styles.labelBlue}>  Giá tiền</Text>
                             <TextInput
                                 style={styles.inputPrice}
                                 keyboardType="numeric"
@@ -187,7 +187,7 @@ const NewPost = ({ navigation }) => {
                             </TextInput>
                         </View>
                         <View style={styles.leftRow}>
-                            <Text style={styles.label}>  Diện tích</Text>
+                            <Text style={styles.labelBlue}>  Diện tích</Text>
                             <TextInput
                                 style={styles.inputPrice}
                                 keyboardType="numeric"
@@ -201,7 +201,7 @@ const NewPost = ({ navigation }) => {
                     </View>
                     <View style={styles.rowWithLeftRight}>
                         <View style={styles.leftRow}>
-                            <Text style={styles.label}>Thành phố</Text>
+                            <Text style={styles.labelBlue}>Thành phố</Text>
                             <Picker
                                 selectedValue={selectedValueCity}
                                 style={{ height: 50, width: '100%', alignItems: 'center' }}
@@ -220,7 +220,7 @@ const NewPost = ({ navigation }) => {
                     </View>
                     <View
                         style={styles.contentInput}>
-                        <Text style={styles.label}> Mô tả tiếng Việt</Text>
+                        <Text style={styles.labelBlue}> Mô tả tiếng Việt</Text>
                         <TextInput
                             style={styles.inputTextArea}
                             multiline={true}
@@ -231,7 +231,7 @@ const NewPost = ({ navigation }) => {
                     </View>
                     <View
                         style={styles.contentInput}>
-                        <Text style={styles.label}> Mô tả tiếng Anh</Text>
+                        <Text style={styles.labelBlue}> Mô tả tiếng Anh</Text>
                         <TextInput
                             style={styles.inputTextArea}
                             multiline={true}

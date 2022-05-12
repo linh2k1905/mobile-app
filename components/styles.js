@@ -334,7 +334,7 @@ export const styles = StyleSheet.create({
 
     },
     button: {
-        backgroundColor: teritary,
+        backgroundColor: "blue",
         width: 100,
         height: 30,
         borderRadius: 5,
