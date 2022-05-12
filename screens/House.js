@@ -11,7 +11,7 @@ import { heightLine } from './../constants'
 const House = ({ navigation }) => {
 
     const myContext = useContext(AppContext);
-    const [selectedValueCity, setSelectedValueCity] = useState();
+    const [selectedValueCity, setSelectedValueCity] = useState(0);
     const [selectedValuePrice, setSelectedValuePrice] = useState();
     const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState();
     const [selectedValueArea, setSelectedValueArea] = useState();
@@ -67,7 +67,7 @@ const House = ({ navigation }) => {
     function getAllHouseSearch(cityId, typeHouseId, area, price) {
         if ((!typeHouseId || !area || !price) && cityId) {
             console.log(URL.LOCALHOST + `/api/get-all-home-by-city?idCity=${cityId}`);
-            fetch(URL.LOCALHOST + `/api/get-all-home-by-city?idCity=${cityId}`,
+            fetch(URL.LOCALHOST + `/api/get-all-home-by-city-from-mobile?idCity=${cityId}`,
                 {
                     method: 'GET',
                     headers: {
@@ -78,8 +78,10 @@ const House = ({ navigation }) => {
             )
                 .then(async res => {
                     let response = await res.json();
+                    console.log(response.data);
                     let data = response.data;
                     setFilterHouse(data);
+
 
 
 
@@ -229,7 +231,7 @@ const House = ({ navigation }) => {
                     <Text style={styles.guess}>Hiển thị kết quả gợi ý </Text>
                 </View>
 
-                {filterHouse.length > 0 && filterHouse.map((item, index) => {
+                {filterHouse.length > 0 ? filterHouse.map((item, index) => {
                     return (
 
                         <TouchableOpacity
@@ -257,7 +259,15 @@ const House = ({ navigation }) => {
 
 
                     )
-                })}
+                }) : <Text
+                    style={{
+                        padding: 50,
+                        color: 'black',
+                        opacity: 0.5,
+                        fontSize: 20,
+                        textAlign: 'center'
+                    }}
+                >Không tìm thấy kết quả phù hợp</Text>}
 
 
             </ScrollView>

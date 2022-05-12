@@ -248,8 +248,8 @@ export const styles = StyleSheet.create({
 
     },
     titlePost: {
-        color: teritary,
-        fontSize: 30,
+        color: red,
+        fontSize: 20,
         textAlign: 'center',
         fontWeight: 'bold',
         padding: 10

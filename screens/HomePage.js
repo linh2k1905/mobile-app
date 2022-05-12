@@ -48,6 +48,7 @@ const HomePage = ({ route, navigation }) => {
                     }
                 }
             />
+
             <Tab.Screen
                 name="NewPost"
                 component={NewPost}

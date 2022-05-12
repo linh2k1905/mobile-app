@@ -128,7 +128,7 @@ const NewPost = ({ navigation }) => {
             <ScrollView>
 
                 <View style={styles.row}>
-                    <Text style={styles.titlePost}>Đăng tin </Text>
+                    <Text style={styles.titlePost}>Tìm bạn cùng phòng </Text>
                     <MaterialCommunityIcons
                         name="newspaper-plus"
                         color={teritary} size={30}

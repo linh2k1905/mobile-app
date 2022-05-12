@@ -1,6 +1,11 @@
 import RootStack from "./navigators/RootStack";
 import AppContext from './components/AppContext';
 import { useState } from "react";
+import { YellowBox } from 'react-native';
+
+YellowBox.ignoreWarnings(['Warning: ...']);
+
+console.disableYellowBox = true;
 export default function App() {
   const [userInfo, setUserInfo] = useState({});
   const [typeHouseAll, setTypeHouseAll] = useState();
