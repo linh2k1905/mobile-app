@@ -20,20 +20,23 @@ const NewPost = ({ navigation }) => {
     const [descVi, onChangeDescVi] = useState();
     const [selectedValueCity, setSelectedValueCity] = useState();
     const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState(5);
+    const [imageSending, setImageSending] = useState();
     const myContext = useContext(AppContext);
-    const [image, setImage] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
     const userInfo = myContext.userInfo;
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
+
+            quality: 0.5,
             base64: true
         });
         if (!result.cancelled) {
-            setImage(result);
+            setImagePreview(result.uri);
+            setImageSending(result.base64);
+            // console.log(result.base64);
         }
     };
     const uploadImage = () => {
@@ -82,8 +85,24 @@ const NewPost = ({ navigation }) => {
         fetchAllCity();
 
     }, []);
+    function checkinput(data) {
+        let arr = ["name", "address", "price", "area", "userId", "cityId", "typeHouseId", "image", "descEn", "descVi"];
+        arr.map((item, index) => {
+            if (!data[item]) {
+                alert("Please fill full form " + item);
+
+
+
+            }
+
+            return false;
+        })
+        return true;
+    }
     const handlePost = () => {
+
         let data = {};
+
         data.name = name;
         data.address = address;
         data.price = price;
@@ -91,28 +110,33 @@ const NewPost = ({ navigation }) => {
         data.userId = userInfo.id;
         data.cityId = selectedValueCity;
         data.typeHouseId = selectedValueTypeHouse;
-        data.image = image;
+        data.image = "data:image/jpeg;base64," + imageSending;
         data.descEn = desc;
         data.descVi = descVi;
+        let isCheck = checkinput(data);
+        if (isCheck) {
+            fetch(URL.LOCALHOST + '/api/create-new-post',
 
-        fetch(URL.LOCALHOST + '/api/create-new-post',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
 
-            {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                }).then(async res => {
+                    let data = await res.json();
+                    if (data.errorCode === 0) {
+                        alert(data.messageCode);
 
-                },
-                body: JSON.stringify(data),
-            }).then(async res => {
-                let data = await res.json();
-                if (data.errorCode === 0) {
-                    alert(data.messageCode);
-
-                }
-            })
-            .catch(err => console.log(err));
+                    }
+                    else {
+                        alert(data.messageCode);
+                    }
+                })
+                .catch(err => console.log(err));
+        }
     }
 
     return (
@@ -242,11 +266,11 @@ const NewPost = ({ navigation }) => {
                     </View>
                     <View style={styles.rowRight}>
                         <View style={styles.rowLeft}>
-                            {image && <Image
-                                source={{ uri: image.uri }}
+                            {imageSending && <Image
+                                source={{ uri: "data:image/jpeg;base64," + imageSending }}
                                 style={{
-                                    width: 100,
-                                    height: 100,
+                                    width: 50,
+                                    height: 50,
                                     resizeMode: 'cover'
                                 }}
                             />}
