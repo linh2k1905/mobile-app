@@ -13,7 +13,7 @@ const User = ({ navigation }) => {
         navigation.navigate('Login');
     }
     const handleChangePassword = () => {
-        alert("Change Password");
+
         navigation.navigate("ChangePassword")
     }
     return (

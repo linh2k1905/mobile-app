@@ -1,9 +1,59 @@
-import { NavigationContainer } from '@react-navigation/native';
-import react from 'react-native'
+import { useState } from "react"
 import { StatusBar, View, Text, TextInput, TouchableOpacity, SafeAreaView } from 'react-native'
-import { styles } from './../components/styles'
+import { styles } from './../components/styles';
+import { URL } from '../constants';
+import { useContext } from 'react';
+import AppContext from './../components/AppContext';
 const chieucao = StatusBar.currentHeight + 10;
 const NewPost = ({ navigation }) => {
+    const myContext = useContext(AppContext);
+    const userInfo = myContext.userInfo;
+    const [oldPassword, setOldPassword] = useState();
+    const [newPassword, setNewPassword] = useState();
+    const [retypeNewPassword, setRetypeNewPassword] = useState();
+
+    const checkpass = (pass, repass) => {
+        if (pass === repass) {
+            return true;
+        }
+        return false;
+    }
+    const postChangePassword = () => {
+        if (checkpass(retypeNewPassword, newPassword)) {
+            let data = {}
+            data.password = oldPassword;
+            data.newpassword = newPassword;
+            data.id = userInfo.id
+
+            let url = URL.LOCALHOST + '/api/edit-user-password'
+            fetch(url,
+
+                {
+                    method: 'PUT',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                    ,
+                    body: JSON.stringify(data)
+                }).then(async res => {
+                    let result = await res.json();
+                    console.log(result);
+                    if (result.errorCode === 0) {
+                        alert("Cập nhật thành công");
+                        navigation.navigate("Login");
+
+                    }
+                    else {
+                        alert("Lỗi khi thay đổi")
+                    }
+
+                }).catch(e => console.log(e))
+        } else {
+            alert("Mật khẩu không khớp");
+        }
+
+    }
     return (
         <SafeAreaView
 
@@ -18,19 +68,23 @@ const NewPost = ({ navigation }) => {
                 <TextInput
                     style={styles.inputEdit}
                     secureTextEntry={true}
+                    onChangeText={setOldPassword}
+                    value={oldPassword}
                 />
 
                 <Text style={styles.label}>   Mật Khẩu Mới </Text>
                 <TextInput
                     style={styles.inputEdit}
                     secureTextEntry={true}
-
+                    onChangeText={setNewPassword}
+                    value={newPassword}
                 />
                 <Text style={styles.label}>   Nhập lại mật khẩu</Text>
                 <TextInput
                     style={styles.inputEdit}
                     secureTextEntry={true}
-
+                    onChangeText={setRetypeNewPassword}
+                    value={retypeNewPassword}
                 />
             </View>
             <View
@@ -46,6 +100,7 @@ const NewPost = ({ navigation }) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.button}
+                    onPress={postChangePassword}
                 >
                     <Text style={styles.textWhite}>
                         Đổi mật khẩu
