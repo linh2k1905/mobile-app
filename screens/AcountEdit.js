@@ -1,48 +1,145 @@
 import react, { useState } from 'react'
-import { StatusBar, SafeAreaView, Text, TextInput, View, TouchableOpacity } from 'react-native'
+import { StatusBar, ScrollView, SafeAreaView, Text, TextInput, View, TouchableOpacity, Image } from 'react-native'
 import { heightLine } from '../constants';
 import { styles } from '../components/styles';
 import { useContext } from 'react';
 import AppContext from './../components/AppContext';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as ImagePicker from 'expo-image-picker';
+import { URL } from '../constants';
 const AcountEdit = ({ navigation }) => {
     const myContext = useContext(AppContext);
     let userInfo = myContext.userInfo;
-    const [text, onChangeText] = useState("Useless Text");
-    console.log(userInfo);
+    const [firstName, setFirstName] = useState(userInfo.firstName);
+    const [lastName, setLastName] = useState(userInfo.lastName);
+    const [tel, setTel] = useState(userInfo.tel);
+    const [address, setAddress] = useState(userInfo.address);
+    const [imageSending, setImageSending] = useState(userInfo.image);
+    const [imagePreview, setImagePreview] = useState(null);
+    const [changeImage, setChangeImage] = useState(false);
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
 
+            quality: 0.5,
+            base64: true
+        });
+        if (!result.cancelled) {
+            setImagePreview(result.uri);
+            setImageSending(result.base64);
+            setChangeImage(true);
+        }
+    };
+    const handleEditUser = async () => {
+        let data = {};
+        data.firstName = firstName;
+        data.lastName = lastName;
+        data.roleId = userInfo.roleId;
+        data.address = address;
+        data.tel = tel;
+        data.id = userInfo.id;
+        if (changeImage)
+            data.image = "data:image/jpeg;base64," + imageSending;
+        else;
+        let url = URL.LOCALHOST + '/api/edit-user';
+        console.log(url);
+        fetch(url,
+
+            {
+                method: 'PUT',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                }
+                ,
+                body: JSON.stringify(data)
+            }).then(async res => {
+                let result = await res.json();
+                console.log(result);
+                if (result.errorCode === 0) {
+                    alert("Cập nhật thành công");
+                    navigation.navigate("HomePage");
+
+                }
+                else {
+                    alert("Lỗi khi thay đổi")
+                }
+
+            }).catch(e => console.log(e))
+    }
 
     return (
 
         <SafeAreaView
-            style={{ top: heightLine + 10 }}
+            style={{ top: heightLine + 5 }}
         >
-            <Text style={styles.title}>Chỉnh sửa trang cá nhân</Text>
-            <MaterialCommunityIcons style={styles.title} name="folder-edit-outline" />
-            <Text style={styles.label}>Họ </Text>
-            <TextInput
-                style={styles.inputEdit}
-                onChangeText={onChangeText}
-                value={text}
-            />
-            <Text style={styles.label}>Tên </Text>
-            <TextInput
-                style={styles.inputEdit}
-                onChangeText={onChangeText}
-                value={text}
-            />
-            <Text style={styles.label}>Số điện thoại</Text>
-            <TextInput
-                style={styles.inputEdit}
-                onChangeText={onChangeText}
-                value={text}
-            />
-            <Text style={styles.label}>Địa chỉ </Text>
-            <TextInput
-                style={styles.inputEdit}
-                onChangeText={onChangeText}
-                value={text}
-            />
+            <ScrollView>
+                <Text style={styles.title}>Chỉnh sửa trang cá nhân</Text>
+                <MaterialCommunityIcons style={styles.title} name="folder-edit-outline" />
+                <View
+                    style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }}>
+                    <Image
+                        source={{ uri: changeImage ? imagePreview : userInfo.image }}
+                        style={{
+                            width: 150,
+                            height: 150,
+                            resizeMode: 'cover',
+                            alignContent: 'center'
+                        }}
+                    ></Image>
+                    <TouchableOpacity
+                        onPress={() => { pickImage() }}
+                        style={{
+                            backgroundColor: 'blue',
+                            width: 50,
+                            alignContent: 'center',
+                            alignItems: 'center',
+                            margin: 5
+
+                        }}
+                    ><Text
+                        style={styles.textWhite}
+                    >Đổi ảnh</Text></TouchableOpacity>
+                </View>
+
+                <Text style={styles.label}>   Họ </Text>
+
+                <TextInput
+                    style={styles.inputEdit}
+                    onChangeText={setLastName}
+                    value={lastName}
+                />
+
+                <Text style={styles.label}>   Tên </Text>
+                <TextInput
+                    style={styles.inputEdit}
+                    onChangeText={setFirstName}
+                    value={firstName}
+                />
+                <Text style={styles.label}>   Số điện thoại</Text>
+                <TextInput
+                    style={styles.inputEdit}
+                    onChangeText={setTel}
+                    value={tel}
+                />
+                <Text style={styles.label}>   Địa chỉ </Text>
+                <TextInput
+                    style={styles.inputEdit}
+                    onChangeText={setAddress}
+                    value={address}
+                />
+                <View style={styles.rowRight}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={handleEditUser}
+                    ><Text
+                        style={styles.textWhite}
+                    >Chỉnh sửa</Text></TouchableOpacity>
+
+                </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }

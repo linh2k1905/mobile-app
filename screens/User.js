@@ -9,23 +9,20 @@ const User = ({ navigation }) => {
     const myContext = useContext(AppContext);
     let userInfo = myContext.userInfo;
     const Logout = async () => {
-        await myContext.goUser({});
+        myContext.goUser({});
         navigation.navigate('Login');
+    }
+    const handleChangePassword = () => {
+        alert("Change Password");
+        navigation.navigate("ChangePassword")
     }
     return (
 
 
-        <SafeAreaView >
-            <View style={styles.logout}>
-                <TouchableOpacity
-                    onPress={() => Logout()}
+        <SafeAreaView
+            style={{ top: heightLine + 10 }}
+        >
 
-                >
-                    <Text style={styles.accountInfo}> Đăng xuất <MaterialCommunityIcons name="logout" size={16} /></Text>
-
-
-                </TouchableOpacity>
-            </View>
             {userInfo &&
                 <View
                     style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }}
@@ -33,13 +30,13 @@ const User = ({ navigation }) => {
                     <Text style={styles.title}>Thông tin người dùng</Text>
                     <Image
                         source={{ uri: userInfo.image ? userInfo.image : 'https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-11.jpg ' }}
-                        style={{ width: 100, height: 100, padding: 10 }}
+                        style={{ width: 150, height: 150, padding: 10 }}
                     />
                     <View
                         style={{ justifyContent: 'flex-end', padding: 10 }}
                     >
 
-                        <Text style={styles.accountInfo}>Họ và tên: {userInfo.firstName + " " + userInfo.lastName}</Text>
+                        <Text style={styles.accountInfo}>Họ và tên: {userInfo.lastName + " " + userInfo.firstName}</Text>
                         <Text style={styles.accountInfo}>Số điện thoại: {userInfo.tel}</Text>
                         <Text style={styles.accountInfo}>Email: {userInfo.email}</Text>
                         <Text style={styles.accountInfo}>Địa chỉ: {userInfo.address}</Text>
@@ -54,7 +51,11 @@ const User = ({ navigation }) => {
                     <Text style={styles.acountFunction}> <MaterialCommunityIcons name="lead-pencil" size={16} />  Chỉnh sửa thông tin người dùng</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={handleChangePassword}
+
+
+                >
                     <Text style={styles.acountFunction}><MaterialCommunityIcons name="onepassword" size={16} />  Đổi mật khẩu</Text>
                 </TouchableOpacity>
                 <TouchableOpacity

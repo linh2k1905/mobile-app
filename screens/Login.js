@@ -34,7 +34,9 @@ const { brand, darklight, primary } = Colors;
 
 
 const Login = ({ navigation }) => {
+
     const myContext = useContext(AppContext);
+
     const handleLogin = (values, navigation) => {
         const r = JSON.stringify(values);
         fetch(URL.LOCALHOST + '/api/login-from-mobile', {

@@ -16,7 +16,7 @@ const House = ({ navigation }) => {
     const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState();
     const [selectedValueArea, setSelectedValueArea] = useState();
     const [filterHouse, setFilterHouse] = useState([]);
-
+    const [isSearch, setIsSearch] = useState(false);
     const heightStatus = StatusBar.currentHeight;
 
     const fetchAllCity = async () => {
@@ -65,6 +65,7 @@ const House = ({ navigation }) => {
     }, []);
 
     function getAllHouseSearch(cityId, typeHouseId, area, price) {
+        setIsSearch(true);
         if ((!typeHouseId || !area || !price) && cityId) {
             console.log(URL.LOCALHOST + `/api/get-all-home-by-city?idCity=${cityId}`);
             fetch(URL.LOCALHOST + `/api/get-all-home-by-city-from-mobile?idCity=${cityId}`,
@@ -259,15 +260,27 @@ const House = ({ navigation }) => {
 
 
                     )
-                }) : <Text
-                    style={{
-                        padding: 50,
-                        color: 'black',
-                        opacity: 0.5,
-                        fontSize: 20,
-                        textAlign: 'center'
-                    }}
-                >Không tìm thấy kết quả phù hợp</Text>}
+                }) :
+
+                    isSearch ?
+                        <Text
+                            style={{
+                                padding: 50,
+                                color: 'black',
+                                opacity: 0.5,
+                                fontSize: 20,
+                                textAlign: 'center'
+                            }}
+                        >Không tìm thấy kết quả phù hợp</Text>
+                        : <Text
+                            style={{
+                                padding: 50,
+                                color: 'black',
+                                opacity: 0.5,
+                                fontSize: 20,
+                                textAlign: 'center'
+                            }}
+                        ></Text>}
 
 
             </ScrollView>

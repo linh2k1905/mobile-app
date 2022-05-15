@@ -5,7 +5,7 @@ import { heightLine } from './../constants'
 export const Colors = {
     primary: "#ffffff",
     secondary: "#E5E7EB",
-    teritary: "#1F2973",
+    teritary: "blue",
     brand: "#6D28D9",
     green: "#10B981",
     red: "#EF4444",
@@ -41,7 +41,7 @@ export const PageTitle = styled.Text`
 font-size:30px;
 text-align:center;
 font-weight:bold;
-color:${brand};
+color:${teritary};
 padding:10px
 `
 export const Subtitle = styled.Text`
@@ -89,7 +89,7 @@ z-index:1
 export const StyleButton = styled.TouchableOpacity`
 padding:10px;
 border-radius:5px;
-background-color:${brand};
+background-color:${teritary};
 font-size:16px
 ${(props) => props.google == true && `
 background-color:${red}
@@ -100,7 +100,7 @@ flex-direction:row;
 `
 export const ButtonText = styled.Text`
 
-background-color:${brand};
+background-color:${teritary};
 justify-content:center;
 border-radius:5px;
 align-items:center;
@@ -142,7 +142,7 @@ align-items:center;
 `
 
 export const TextLinkContent = styled.Text`
-color:${brand}
+color:${teritary}
 font-size:15px;
 
 `
@@ -234,9 +234,10 @@ export const styles = StyleSheet.create({
 
     title: {
         color: teritary,
-        fontSize: 20,
+        fontSize: 25,
         textAlign: 'center',
-        fontWeight: '600'
+        fontWeight: '600',
+        margin: 10
 
     },
     titleBooking: {
@@ -259,7 +260,8 @@ export const styles = StyleSheet.create({
         color: teritary,
         fontSize: 20,
         textAlign: 'left',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        margin: 0,
 
     },
     labelBlue: {
