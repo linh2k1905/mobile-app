@@ -36,7 +36,7 @@ const { brand, darklight, primary } = Colors;
 const Login = ({ navigation }) => {
 
     const myContext = useContext(AppContext);
-
+    const [message, setMess] = useState('...');
     const handleLogin = (values, navigation) => {
         const r = JSON.stringify(values);
         fetch(URL.LOCALHOST + '/api/login-from-mobile', {
@@ -54,6 +54,9 @@ const Login = ({ navigation }) => {
                     let data = response.userdata;
                     myContext.goUser(data);
                     navigation.navigate('HomePage');
+                }
+                else {
+                    setMess(response.messageCode);
                 }
 
             })
@@ -103,7 +106,7 @@ const Login = ({ navigation }) => {
                                 hidePassword={hidePassword}
                                 setHidePassword={setHidePassword}
                             />
-                            <MessageBox>...</MessageBox>
+                            <MessageBox>{message}</MessageBox>
                             <StyleButton
                                 onPress={handleSubmit}
 

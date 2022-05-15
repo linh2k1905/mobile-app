@@ -96,6 +96,8 @@ const Bookings = ({ route, navigation }) => {
         req.address = item.address;
         req.name = item.name;
         req.idHouse = item.id;
+        req.firstName = userInfo.firstName;
+        req.lastName = userInfo.lastName;
         console.log(req);
         fetch(url,
             {

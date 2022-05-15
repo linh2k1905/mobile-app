@@ -6,7 +6,7 @@ export const Colors = {
     primary: "#ffffff",
     secondary: "#E5E7EB",
     teritary: "blue",
-    brand: "#6D28D9",
+    brand: "blue",
     green: "#10B981",
     red: "#EF4444",
     darklight: '#F0FFFF'
@@ -118,6 +118,9 @@ align-items:center;
 export const MessageBox = styled.Text`
  text-align:center;
  font-size:13px;
+ color:${red};
+ font-weight:bold;
+ padding:5px
 `;
 export const Line = styled.View`
 height: 2px;
