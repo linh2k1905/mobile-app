@@ -9,7 +9,8 @@ const User = ({ navigation }) => {
     const myContext = useContext(AppContext);
     let userInfo = myContext.userInfo;
     const Logout = async () => {
-        myContext.goUser({});
+        let data = {}
+        myContext.goUser(data);
         navigation.navigate('Login');
     }
     const handleChangePassword = () => {
@@ -45,7 +46,7 @@ const User = ({ navigation }) => {
             }
             <View >
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('AcountEdit')}
+                    onPress={() => navigation.navigate('AcountEdit', { userInfo })}
                 >
 
                     <Text style={styles.acountFunction}> <MaterialCommunityIcons name="lead-pencil" size={16} />  Chỉnh sửa thông tin người dùng</Text>
@@ -64,8 +65,6 @@ const User = ({ navigation }) => {
                     <Text style={styles.acountFunction}> <MaterialCommunityIcons name="logout" size={16} />  Đăng xuất</Text>
                 </TouchableOpacity>
 
-
-                <TouchableOpacity><Text style={styles.acountFunction}><MaterialCommunityIcons name="newspaper-variant-multiple" size={16} />  Xem bài đăng của bạn</Text></TouchableOpacity>
             </View>
         </SafeAreaView>
 

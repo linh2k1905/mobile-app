@@ -1,4 +1,4 @@
-import react, { useState } from 'react'
+import react, { useState, useEffect } from 'react'
 import { StatusBar, ScrollView, SafeAreaView, Text, TextInput, View, TouchableOpacity, Image } from 'react-native'
 import { heightLine } from '../constants';
 import { styles } from '../components/styles';
@@ -7,9 +7,9 @@ import AppContext from './../components/AppContext';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as ImagePicker from 'expo-image-picker';
 import { URL } from '../constants';
-const AcountEdit = ({ navigation }) => {
+const AcountEdit = ({ route, navigation }) => {
     const myContext = useContext(AppContext);
-    let userInfo = myContext.userInfo;
+    const { userInfo } = route.params;
     const [firstName, setFirstName] = useState(userInfo.firstName);
     const [lastName, setLastName] = useState(userInfo.lastName);
     const [tel, setTel] = useState(userInfo.tel);
@@ -32,6 +32,7 @@ const AcountEdit = ({ navigation }) => {
             setChangeImage(true);
         }
     };
+
     const handleEditUser = async () => {
         let data = {};
         data.firstName = firstName;
@@ -40,6 +41,8 @@ const AcountEdit = ({ navigation }) => {
         data.address = address;
         data.tel = tel;
         data.id = userInfo.id;
+        data.email = userInfo.email;
+        data.image = userInfo.image;
         if (changeImage)
             data.image = "data:image/jpeg;base64," + imageSending;
         else;
@@ -61,6 +64,7 @@ const AcountEdit = ({ navigation }) => {
                 if (result.errorCode === 0) {
                     alert("Cập nhật thành công");
                     navigation.navigate("HomePage");
+                    myContext.goUser(data);
 
                 }
                 else {
@@ -69,7 +73,6 @@ const AcountEdit = ({ navigation }) => {
 
             }).catch(e => console.log(e))
     }
-
     return (
 
         <SafeAreaView

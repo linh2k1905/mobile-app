@@ -37,7 +37,9 @@ const Login = ({ navigation }) => {
 
     const myContext = useContext(AppContext);
     const [message, setMess] = useState('...');
-    const handleLogin = (values, navigation) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const handleLogin = (values, resetForm, navigation) => {
         const r = JSON.stringify(values);
         fetch(URL.LOCALHOST + '/api/login-from-mobile', {
             method: 'POST',
@@ -53,6 +55,7 @@ const Login = ({ navigation }) => {
                 if (response.error == 0) {
                     let data = response.userdata;
                     myContext.goUser(data);
+                    resetForm();
                     navigation.navigate('HomePage');
                 }
                 else {
@@ -78,8 +81,8 @@ const Login = ({ navigation }) => {
                 <PageTitle>TimPhongTro123</PageTitle>
                 <Subtitle>Acount Login</Subtitle>
                 <Formik
-                    initialValues={{ email: '', password: '' }}
-                    onSubmit={values => handleLogin(values, navigation)}
+                    initialValues={{ email: email, password: password }}
+                    onSubmit={(values, { resetForm }) => handleLogin(values, resetForm, navigation)}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values }) => (
 
