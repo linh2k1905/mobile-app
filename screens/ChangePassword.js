@@ -18,7 +18,14 @@ const NewPost = ({ navigation }) => {
         }
         return false;
     }
+    const checkInPut = () => {
+        if (!retypeNewPassword || !oldPassword) {
+            alert("Vui lòng nhập mật khẩu");
+        }
+
+    }
     const postChangePassword = () => {
+
         if (checkpass(retypeNewPassword, newPassword)) {
             let data = {}
             data.password = oldPassword;
@@ -40,12 +47,12 @@ const NewPost = ({ navigation }) => {
                     let result = await res.json();
                     console.log(result);
                     if (result.errorCode === 0) {
-                        alert("Cập nhật thành công");
+                        alert(result.messageCode);
                         navigation.navigate("Login");
 
                     }
                     else {
-                        alert("Lỗi khi thay đổi")
+                        alert(result.messageCode)
                     }
 
                 }).catch(e => console.log(e))

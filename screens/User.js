@@ -37,7 +37,7 @@ const User = ({ navigation }) => {
                         style={{ justifyContent: 'flex-end', padding: 10 }}
                     >
 
-                        <Text style={styles.accountInfo}>Họ và tên: {userInfo.lastName + " " + userInfo.firstName}</Text>
+                        <Text style={styles.accountInfo}>Họ và tên: {userInfo.lastName ? userInfo.lastName + " " + userInfo.firstName : "Chưa xác định"}</Text>
                         <Text style={styles.accountInfo}>Số điện thoại: {userInfo.tel}</Text>
                         <Text style={styles.accountInfo}>Email: {userInfo.email}</Text>
                         <Text style={styles.accountInfo}>Địa chỉ: {userInfo.address}</Text>

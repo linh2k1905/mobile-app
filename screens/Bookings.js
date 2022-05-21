@@ -18,6 +18,29 @@ const Bookings = ({ route, navigation }) => {
     const [time, setTime] = useState();
     const [password, setPassword] = useState();
     const [notice, setNotice] = useState();
+    const owner = item.User;
+    const [timeArr, setTimeArr] = useState([]);
+    const getScheduleFromServer = async (date) => {
+
+        let ownerId = owner.id;
+        let url = URL.LOCALHOST + `/api/get-schedule-owner?id=${encodeURIComponent(ownerId)}&date=${encodeURIComponent(date)}`;
+        console.log(url);
+        await fetch(url,
+            {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                }
+            }
+
+        )
+            .then(async res => {
+                let response = await res.json();
+                let data = response.data;
+                if (response.errorCode === 0) setTimeSelected(data);
+
+            }).catch(err => { console.log(err) });
+    }
     function setArrayTime() {
         const allDays = [];
         for (let i = 0; i <= 7; i++) {
@@ -33,30 +56,7 @@ const Bookings = ({ route, navigation }) => {
 
         }
 
-        function getScheduleFromServer() {
 
-            let owner = item.User.id;
-            console.log(dateSelected);
-            let url = URL.LOCALHOST + `/api/get-schedule-owner?id=${encodeURIComponent(owner)}&date=${encodeURIComponent(dateSelected)}`;
-            console.log(url);
-            fetch(url,
-                {
-                    method: 'GET',
-                    headers: {
-                        Accept: 'application/json',
-                    }
-                }
-
-            )
-                .then(async res => {
-                    let response = await res.json();
-                    console.log(response);
-                    let data = response.data;
-                    console.log(data);
-                    if (response.errorCode === 0) setTimeSelected(data);
-
-                }).catch(err => { console.log(err) });
-        }
 
 
 
@@ -65,9 +65,8 @@ const Bookings = ({ route, navigation }) => {
             <Picker
                 selectedValue={dateSelected}
                 onValueChange={(itemValue, itemIndex) => {
+                    handleChooseDate(itemValue);
 
-                    setDateSelected(itemValue);
-                    getScheduleFromServer()
                 }}
 
             >
@@ -81,47 +80,71 @@ const Bookings = ({ route, navigation }) => {
             </Picker>
         )
     }
+    const handleChooseDate = async (value) => {
+        await getScheduleFromServer(value);
+        setDateSelected(value);
+    }
+    const checkInput = () => {
+
+
+        if (!password || !mail) {
+            alert("Vui lòng điền đủ thông tin để xác thực");
+            return false;
+
+
+        }
+        else
+            if (!dateSelected || !timeSelected) {
+                alert("Vui lòng chọn ngày giờ");
+                return false;
+
+            }
+
+
+        return true
+    }
 
     function postBooking() {
         let url = URL.LOCALHOST + "/api/user-booking";
         console.log(url);
-        let req = {};
-        req.email = mail;
-        req.password = password;
-        req.date = dateSelected.toString();
-        req.time = time;
-        req.idHouse = item.id;
-        req.desc = notice;
-        req.nameOwner = item.User.firstName + item.User.lastName;
-        req.address = item.address;
-        req.name = item.name;
-        req.idHouse = item.id;
-        req.firstName = userInfo.firstName;
-        req.lastName = userInfo.lastName;
-        console.log(req);
-        fetch(url,
-            {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
 
-                },
-                body: JSON.stringify(
+        if (checkInput()) {
+            let req = {};
+            req.email = mail;
+            req.password = password;
+            req.date = dateSelected.toString();
+            req.time = time;
+            req.idHouse = item.id;
+            req.desc = notice;
+            req.nameOwner = item.User.firstName + item.User.lastName;
+            req.address = item.address;
+            req.name = item.name;
+            req.idHouse = item.id;
+            req.firstName = userInfo.firstName;
+            req.lastName = userInfo.lastName;
+            fetch(url,
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
 
-                    req
-                )
-            }
+                    },
+                    body: JSON.stringify(
 
-        )
-            .then(async res => {
-                setTimeout(() => { }, 6000);
-                let response = await res.json();
-                let data = response.data;
-                console.log(data);
-                if (data.errorCode === 0) alert("Đặt lịch thành công");
+                        req
+                    )
+                }
 
-            }).catch(err => { console.log(err) });
+            )
+                .then(async res => {
+                    let response = await res.json();
+                    let data = response.data;
+                    if (data.errorCode === 0) alert("Đặt lịch thành công");
+
+                }).catch(err => { console.log(err) });
+        }
+
 
     }
     return (
@@ -158,7 +181,7 @@ const Bookings = ({ route, navigation }) => {
                 <Text style={styles.label}> Chọn giờ</Text>
 
                 <Picker
-                    selectedValue={time}
+                    selectedValue={timeSelected}
                     onValueChange={(itemValue, itemIndex) => setTime(itemValue)}
                     style={{
                         width: "50%",

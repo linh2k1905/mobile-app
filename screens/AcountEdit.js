@@ -32,6 +32,27 @@ const AcountEdit = ({ route, navigation }) => {
             setChangeImage(true);
         }
     };
+    const checkInPut = (data) => {
+        if (!data.firstName) {
+            alert("Vui lòng nhập tên")
+            return false;
+        };
+        if (!data.lastName) {
+            alert("Vui lòng nhập tên")
+            return false
+        };
+        if (!data.tel) {
+
+            alert("Vui lòng nhập số điện thoại")
+            return false
+        };
+        if (!data.address) {
+            alert("Vui lòng nhập địa chỉ")
+            return false;
+        };
+        return true;
+
+    }
 
     const handleEditUser = async () => {
         let data = {};
@@ -47,31 +68,32 @@ const AcountEdit = ({ route, navigation }) => {
             data.image = "data:image/jpeg;base64," + imageSending;
         else;
         let url = URL.LOCALHOST + '/api/edit-user';
-        console.log(url);
-        fetch(url,
+        if (checkInPut(data)) {
+            fetch(url,
 
-            {
-                method: 'PUT',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                }
-                ,
-                body: JSON.stringify(data)
-            }).then(async res => {
-                let result = await res.json();
-                console.log(result);
-                if (result.errorCode === 0) {
-                    alert("Cập nhật thành công");
-                    navigation.navigate("HomePage");
-                    myContext.goUser(data);
+                {
+                    method: 'PUT',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                    ,
+                    body: JSON.stringify(data)
+                }).then(async res => {
+                    let result = await res.json();
+                    console.log(result);
+                    if (result.errorCode === 0) {
+                        alert("Cập nhật thành công");
+                        navigation.navigate("HomePage");
+                        myContext.goUser(data);
 
-                }
-                else {
-                    alert("Lỗi khi thay đổi")
-                }
+                    }
+                    else {
+                        alert("Lỗi khi thay đổi")
+                    }
 
-            }).catch(e => console.log(e))
+                }).catch(e => console.log(e))
+        }
     }
     return (
 

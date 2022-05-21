@@ -41,6 +41,7 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const handleLogin = (values, resetForm, navigation) => {
         const r = JSON.stringify(values);
+
         fetch(URL.LOCALHOST + '/api/login-from-mobile', {
             method: 'POST',
             headers: {
@@ -53,9 +54,11 @@ const Login = ({ navigation }) => {
             .then(async (res) => {
                 let response = await res.json();
                 if (response.error == 0) {
+
                     let data = response.userdata;
                     myContext.goUser(data);
                     resetForm();
+                    setMess('...');
                     navigation.navigate('HomePage');
                 }
                 else {

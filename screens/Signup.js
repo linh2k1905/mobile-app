@@ -29,8 +29,10 @@ import { View } from "react-native";
 import { URL } from "../constants";
 const { brand, darklight, primary } = Colors
 const handleSignup = (values, navigation) => {
-    values.roleId = 4;
+    values.roleId = 3;
+
     let req = JSON.stringify(values);
+    console.log(values);
     fetch(URL.LOCALHOST + '/api/create-new-user', {
         method: 'POST',
         headers: {
