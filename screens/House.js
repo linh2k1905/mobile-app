@@ -250,6 +250,7 @@ const House = ({ navigation }) => {
                         >
                             <View ><Text style={styles.cityInfoHouse}>Tên nhà trọ:{item.name}</Text></View>
                             <View ><Text style={styles.cityInfoHouse} >Giá: {item.price / 1000000} Triệu</Text></View>
+                            <View ><Text style={styles.cityInfoHouse} >Diện tích: {item.area} m2</Text></View>
                             <View ><Text style={styles.cityInfoHouse}>Địa chỉ: {item.address}</Text></View>
                             <View><Text style={styles.cityInfoHouse} >Thành phố: {item.City.name} </Text></View>
                             <Image

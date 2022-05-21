@@ -2,10 +2,9 @@ import RootStack from "./navigators/RootStack";
 import AppContext from './components/AppContext';
 import { useState } from "react";
 import { YellowBox } from 'react-native';
-
 YellowBox.ignoreWarnings(['Warning: ...']);
-
 console.disableYellowBox = true;
+
 export default function App() {
   const [userInfo, setUserInfo] = useState({});
   const [typeHouseAll, setTypeHouseAll] = useState();
@@ -14,6 +13,8 @@ export default function App() {
     setUserInfo(data);
 
   };
+
+
   const userSettings = {
     userInfo: userInfo,
     goUser: goUser,
@@ -22,7 +23,10 @@ export default function App() {
     city: city,
     setCity: setCity,
 
+
   };
+
+
   return (
     <AppContext.Provider value={userSettings}>
       <RootStack />

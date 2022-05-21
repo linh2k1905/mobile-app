@@ -85,18 +85,15 @@ const NewPost = ({ navigation }) => {
         fetchAllCity();
 
     }, []);
-    function checkinput(data) {
+    const checkinput = (data) => {
         let arr = ["name", "address", "price", "area", "userId", "cityId", "typeHouseId", "image", "descEn", "descVi"];
-        arr.map((item, index) => {
-            if (!data[item]) {
-                alert("Please fill full form " + item);
 
-
-
-            }
+        if (!data[arr[0]] || !data[arr[1]] || !data[arr[2]] || !data[arr[3]] || !data[arr[4]] || !data[arr[5]] || !data[arr[6]]) {
 
             return false;
-        })
+
+        }
+
         return true;
     }
     const handlePost = () => {
@@ -136,6 +133,9 @@ const NewPost = ({ navigation }) => {
                     }
                 })
                 .catch(err => console.log(err));
+        }
+        else {
+            alert("Vui lòng nhập đầy đủ thông tin");
         }
     }
 
