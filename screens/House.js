@@ -18,7 +18,13 @@ const House = ({ navigation }) => {
     const [filterHouse, setFilterHouse] = useState([]);
     const [isSearch, setIsSearch] = useState(false);
     const heightStatus = StatusBar.currentHeight;
-
+    const checkSearch = () => {
+        if (!selectedValueCity) {
+            alert("Hãy chọn thành phố");
+            return false;
+        }
+        return true;
+    }
     const fetchAllCity = async () => {
         try {
             let data = await fetch(URL.LOCALHOST + '/api/getCity',
@@ -66,53 +72,55 @@ const House = ({ navigation }) => {
 
     function getAllHouseSearch(cityId, typeHouseId, area, price) {
         setIsSearch(true);
-        if ((!typeHouseId || !area || !price) && cityId) {
-            console.log(URL.LOCALHOST + `/api/get-all-home-by-city?idCity=${cityId}`);
-            fetch(URL.LOCALHOST + `/api/get-all-home-by-city-from-mobile?idCity=${cityId}`,
-                {
-                    method: 'GET',
-                    headers: {
-                        Accept: 'application/json',
+        if (cityId) {
+            if (!typeHouseId || !area || !price) {
+                console.log(URL.LOCALHOST + `/api/get-all-home-by-city?idCity=${cityId}`);
+                fetch(URL.LOCALHOST + `/api/get-all-home-by-city-from-mobile?idCity=${cityId}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            Accept: 'application/json',
+                        }
                     }
-                }
 
-            )
-                .then(async res => {
-                    let response = await res.json();
+                )
+                    .then(async res => {
+                        let response = await res.json();
 
-                    let data = response.data;
-                    setFilterHouse(data);
-
+                        let data = response.data;
+                        setFilterHouse(data);
 
 
 
-                }).catch(err => { console.log(err) });
 
+                    }).catch(err => { console.log(err) });
 
-        }
-
-        else {
-            const url = URL.LOCALHOST + `/api/get-filter-house-from-home-mobile?idTypeHouse=${encodeURIComponent(typeHouseId)}&idCity=${encodeURIComponent(cityId)}&price=${encodeURIComponent(price)}&area=${encodeURIComponent(area)}`;
-            console.log(url);
-            fetch(url,
-                {
-                    method: 'GET',
-                    headers: {
-                        Accept: 'application/json',
+            }
+            else {
+                const url = URL.LOCALHOST + `/api/get-filter-house-from-home-mobile?idTypeHouse=${encodeURIComponent(typeHouseId)}&idCity=${encodeURIComponent(cityId)}&price=${encodeURIComponent(price)}&area=${encodeURIComponent(area)}`;
+                console.log(url);
+                fetch(url,
+                    {
+                        method: 'GET',
+                        headers: {
+                            Accept: 'application/json',
+                        }
                     }
-                }
 
-            )
-                .then(async res => {
-                    let response = await res.json();
-                    let data = response.data;
-                    setFilterHouse(data);
-
+                )
+                    .then(async res => {
+                        let response = await res.json();
+                        let data = response.data;
+                        setFilterHouse(data);
 
 
-                }).catch(err => { console.log(err) });
+
+                    }).catch(err => { console.log(err) });
+            }
         }
     }
+
+
 
 
 
