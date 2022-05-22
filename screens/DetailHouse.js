@@ -73,16 +73,16 @@ const DetailHouse = ({ route, navigation }) => {
                                 <Text>Nhấn vào đây để đặt hẹn</Text>
                             </ContentGetBooking>
                         </ContentImageAndGetBook>
-                        <Text style={{
-                            fontWeight: '600',
-                            fontSize: 20,
-                            color: 'blue'
-                        }}>Thông tin chi tiết</Text>
+                        <Text
+                            style={styles.textBold}
+                        >Thông tin chi tiết</Text>
+
                         <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Giá: {item.price / 1000000} Triệu</Text></View>
                         <View style={styles.infoHouse}><Text style={styles.cityInfoHouse}>Địa chỉ: {item.address}</Text></View>
                         <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Thành phố: {item.City.name} </Text></View>
-                        <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Mô tả: {item.descriptionVi} </Text></View>
-                        <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Desc: {item.descriptionEn} </Text></View>
+                        <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} >Mô tả: </Text></View>
+                        <View style={styles.infoHouse}><Text style={styles.cityInfoHouse} > {item.descriptionVi} </Text></View>
+
                     </View>
                     <View style={styles.titleInfoHouseDetail}><Text style={styles.titleInfoHouseDetail} >Xem bản đồ </Text></View>
                     <MapHouse>

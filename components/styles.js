@@ -214,7 +214,7 @@ export const styles = StyleSheet.create({
     },
     imageHouse: {
         width: '50%',
-        height: 150,
+        height: '100%',
         resizeMode: 'cover',
 
 

@@ -12,9 +12,9 @@ const House = ({ navigation }) => {
 
     const myContext = useContext(AppContext);
     const [selectedValueCity, setSelectedValueCity] = useState();
-    const [selectedValuePrice, setSelectedValuePrice] = useState(100);
-    const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState(1);
-    const [selectedValueArea, setSelectedValueArea] = useState(40);
+    const [selectedValuePrice, setSelectedValuePrice] = useState();
+    const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState();
+    const [selectedValueArea, setSelectedValueArea] = useState();
     const [filterHouse, setFilterHouse] = useState([]);
     const [isSearch, setIsSearch] = useState(false);
     const heightStatus = StatusBar.currentHeight;
@@ -167,6 +167,7 @@ const House = ({ navigation }) => {
                                 style={{ height: 50, width: '100%', alignItems: 'center' }}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValueCity(itemValue)}
                             >
+                                <Picker.Item label="Chọn tên thành phố"></Picker.Item>
                                 {myContext.city && myContext.city.map((item, index) => {
                                     return (
                                         <Picker.Item key={index} value={item.id} label={item.name}></Picker.Item>
@@ -183,6 +184,7 @@ const House = ({ navigation }) => {
                                 style={{ height: 50, width: '100%', alignItems: 'center' }}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValueTypeHouse(itemValue)}
                             >
+                                <Picker.Item label="Hình thức thuê"></Picker.Item>
                                 {myContext.typeHouseAll && myContext.typeHouseAll.map((item, index) => {
                                     return (
                                         <Picker.Item key={index} value={item.id} label={item.nameVi}></Picker.Item>
