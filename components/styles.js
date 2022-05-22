@@ -429,10 +429,11 @@ export const styles = StyleSheet.create({
     },
     filterHouse: {
         width: '100%',
-        height: 250,
+        height: 270,
         borderColor: 'white',
         borderWidth: 0.5,
-        padding: 5
+        padding: 5,
+        bottom: 5
     },
     contentInput: {
         height: "14%",

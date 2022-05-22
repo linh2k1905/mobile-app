@@ -11,10 +11,10 @@ import { heightLine } from './../constants'
 const House = ({ navigation }) => {
 
     const myContext = useContext(AppContext);
-    const [selectedValueCity, setSelectedValueCity] = useState(0);
-    const [selectedValuePrice, setSelectedValuePrice] = useState();
-    const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState();
-    const [selectedValueArea, setSelectedValueArea] = useState();
+    const [selectedValueCity, setSelectedValueCity] = useState();
+    const [selectedValuePrice, setSelectedValuePrice] = useState(100);
+    const [selectedValueTypeHouse, setSelectedValueTypeHouse] = useState(1);
+    const [selectedValueArea, setSelectedValueArea] = useState(40);
     const [filterHouse, setFilterHouse] = useState([]);
     const [isSearch, setIsSearch] = useState(false);
     const heightStatus = StatusBar.currentHeight;
@@ -86,9 +86,13 @@ const House = ({ navigation }) => {
                 )
                     .then(async res => {
                         let response = await res.json();
-
-                        let data = response.data;
-                        setFilterHouse(data);
+                        if (response.errorCode === 0) {
+                            let data = response.data;
+                            setFilterHouse(data);
+                        }
+                        else {
+                            alert("Có lỗi xảy ra. Hãy thử lại")
+                        }
 
 
 
@@ -109,9 +113,14 @@ const House = ({ navigation }) => {
 
                 )
                     .then(async res => {
+
                         let response = await res.json();
-                        let data = response.data;
-                        setFilterHouse(data);
+                        if (response.errorCode === 0) {
+                            let data = response.data;
+                            setFilterHouse(data);
+                        }
+
+
 
 
 

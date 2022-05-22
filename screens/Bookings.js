@@ -116,7 +116,7 @@ const Bookings = ({ route, navigation }) => {
             req.time = time;
             req.idHouse = item.id;
             req.desc = notice;
-            req.nameOwner = item.User.firstName + item.User.lastName;
+            req.nameOwner = item.User.firstName + " " + item.User.lastName;
             req.address = item.address;
             req.name = item.name;
             req.idHouse = item.id;
@@ -141,7 +141,9 @@ const Bookings = ({ route, navigation }) => {
                     let response = await res.json();
                     let data = response.data;
                     if (data.errorCode === 0) alert("Đặt lịch thành công");
-
+                    else {
+                        alert(data.errorMessage);
+                    }
                 }).catch(err => { console.log(err) });
         }
 
