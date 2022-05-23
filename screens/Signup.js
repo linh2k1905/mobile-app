@@ -27,28 +27,42 @@ import { Formik } from "formik";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import { URL } from "../constants";
-const { brand, darklight, primary } = Colors
+const { brand, darklight, primary } = Colors;
+const checkInput = (data) => {
+    if (!data.address || !data.email || !data.password || !data.roleId || !data.tel) {
+        alert("Vui lòng điền đủ thông tin")
+        return false;
+    }
+    return true;
+}
 const handleSignup = (values, navigation) => {
     values.roleId = 3;
 
+
     let req = JSON.stringify(values);
-    console.log(values);
-    fetch(URL.LOCALHOST + '/api/create-new-user', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: req,
-    })
-        .then(async (res) => {
-            let response = await res.json();
-            if (response.errorCode == 0) {
 
-                navigation.navigate('Login');
-            }
-
+    if (checkInput(values)) {
+        fetch(URL.LOCALHOST + '/api/create-new-user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: req,
         })
-        .catch(e => console.log(e));
+            .then(async (res) => {
+                let response = await res.json();
+                if (response.errorCode === 0) {
+
+                    navigation.navigate('Login');
+                }
+                else {
+                    console.log(response);
+                    alert(response.messageCode);
+                }
+
+            })
+            .catch(e => console.log(e));
+    }
 }
 const Signup = ({ navigation }) => {
 
