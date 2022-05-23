@@ -214,8 +214,9 @@ export const styles = StyleSheet.create({
     },
     imageHouse: {
         width: '50%',
-        height: '100%',
+        height: '95%',
         resizeMode: 'cover',
+
 
 
 
@@ -432,8 +433,12 @@ export const styles = StyleSheet.create({
         height: 270,
         borderColor: 'white',
         borderWidth: 0.5,
-        padding: 5,
-        bottom: 5
+        padding: 10,
+        bottom: 10,
+        top: 10,
+        marginTop: 10,
+        marginEnd: 20
+
     },
     contentInput: {
         height: "14%",

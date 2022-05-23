@@ -94,7 +94,7 @@ const Login = ({ navigation }) => {
                             <MyTextInput
                                 label="Email Address"
                                 icon="mail"
-                                placeholder="linh@gmail.com"
+                                placeholder="Email"
                                 onChangeText={handleChange('email')}
                                 onBlur={handleBlur('email')}
                                 value={values.email}

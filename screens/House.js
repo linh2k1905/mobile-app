@@ -270,7 +270,7 @@ const House = ({ navigation }) => {
                                 }}
                                 style={{
                                     width: 200,
-                                    height: 150,
+                                    height: 100,
                                     resizeMode: 'cover',
                                 }
                                 }
